@@ -144,14 +144,18 @@ function checarColisao(nx, ny){
 function mover(dx, dy){
     let nx = pos.x + dx;
     let ny = pos.y + dy;
-    if(nx<0) nx=0; if(ny<0) ny=0;
-    if(nx>lab.clientWidth-20) nx=lab.clientWidth-20;
-    if(ny>lab.clientHeight-20) ny=lab.clientHeight-20;
+
+    // Limites do labirinto
+    nx = Math.max(0, Math.min(nx, lab.clientWidth - 20));
+    ny = Math.max(0, Math.min(ny, lab.clientHeight - 20));
+
     if(!checarColisao(nx, ny)){
-        pos.x = nx; pos.y = ny;
-        bola.style.left = pos.x+"px";
-        bola.style.top = pos.y+"px";
+        pos.x = nx;
+        pos.y = ny;
+        bola.style.left = pos.x + "px";
+        bola.style.top = pos.y + "px";
     }
+
     // Checar objetivo
     const objX = objetivo.offsetLeft;
     const objY = objetivo.offsetTop;
@@ -159,12 +163,18 @@ function mover(dx, dy){
         btnProximoLab.style.display = "inline-block";
     }
 }
-document.addEventListener("keydown", e=>{
-    if(e.key=="ArrowUp") mover(0,-vel);
-    if(e.key=="ArrowDown") mover(0,vel);
-    if(e.key=="ArrowLeft") mover(-vel,0);
-    if(e.key=="ArrowRight") mover(vel,0);
+// Corrigido: Impede scroll da página ao usar as setas
+document.addEventListener("keydown", e => {
+    if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)){
+        e.preventDefault();
+        if(e.key=="ArrowUp") mover(0,-vel);
+        if(e.key=="ArrowDown") mover(0,vel);
+        if(e.key=="ArrowLeft") mover(-vel,0);
+        if(e.key=="ArrowRight") mover(vel,0);
+    }
 });
+
+// Touch para smartphones
 let startTouch = null;
 lab.addEventListener("touchstart", e=>{startTouch=e.touches[0];});
 lab.addEventListener("touchmove", e=>{
