@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Você ❤️</title>
+
+<style>
+/* =========================== */
+/* CONFIGURAÇÕES GERAIS        */
+/* =========================== */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #0b0b0b;
+    color: #e63946;
+    font-family: "Georgia", serif;
+    overflow-x: hidden;
+}
+
+.hidden { display: none; }
+
+button {
+    background: #e63946;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+    transition: 0.3s ease;
+}
+
+button:hover { transform: scale(1.05); }
+
+/* Transição suave entre telas */
+.tela {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+.tela.show {
+    opacity: 1;
+}
+
+/* =========================== */
+/* TELA 1 - CARTA              */
+/* =========================== */
+
+.heart-button {
+    font-size: 5rem;
+    background: none;
+    border: none;
+    color: #ff0033;
+    animation: pulse 1.3s infinite;
+    cursor: pointer;
+    margin-top: 80px;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.envelope {
+    width: 300px;
+    height: 200px;
+    background: #111;
+    border: 2px solid #e63946;
+    margin: 20px auto;
+    border-radius: 8px;
+    opacity: 0;
+    transition: 1s ease;
+    overflow: hidden;
+}
+
+.envelope.open {
+    height: 0px;
+    opacity: 0;
+}
+
+.card {
+    opacity: 0;
+    display: none;
+    margin: 30px auto;
+    max-width: 700px;
+    background: #111;
+    border: 2px solid #e63946;
+    padding: 20px;
+    border-radius: 14px;
+    animation: fade 1.5s forwards;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.gallery img {
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #e63946aa;
+}
+
+/* =========================== */
+/* TELA 2 - JOGO DA BOLINHA    */
+/* =========================== */
+
+#gameArea {
+    margin: 40px auto;
+    width: 300px;
+    height: 300px;
+    background: #111;
+    border: 3px solid #e63946;
+    position: relative;
+}
+
+#player {
+    width: 30px;
+    height: 30px;
+    background: #ff4d88;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#goal {
+    width: 60px;
+    height: 60px;
+    background: #8aff8a;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 10px;
+}
+
+/* =========================== */
+/* TELA 3 - PERGUNTA           */
+/* =========================== */
+
+.quiz-btn {
+    display: block;
+    margin: 15px auto;
+    width: 80%;
+    max-width: 300px;
+    background: #ff0033;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+/* =========================== */
+/* TELA 4 - PEDIDO DE NAMORO   */
+/* =========================== */
+
+#tela4 {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.title-love {
+    font-size: 3rem;
+    color: #ff1a4b;
+    text-shadow: 0 0 20px #ff1a4baa;
+    animation: pulse 2s infinite;
+}
+
+.love-message {
+    color: #fff;
+    font-size: 1.4rem;
+    max-width: 700px;
+    margin: 20px auto;
+    line-height: 1.8rem;
+}
+
+.btn-yes {
+    background: #ff1a4b;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    box-shadow: 0 0 20px #ff1a4ba8;
+}
+
+.btn-no {
+    background: #333;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    margin-left: 20px;
+    position: relative;
+}
+
+/* =========================== */
+/* CORAÇÕES SUBINDO            */
+/* =========================== */
+
+.heart-floating {
+    position: fixed;
+    bottom: -20px;
+    font-size: 2rem;
+    animation: floatUp 6s linear forwards;
+    color: #ff4d88aa;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* =========================== */
+/* FOGOS DE ARTIFÍCIO          */
+/* =========================== */
+
+.firework {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(10); opacity: 0; }
+}
+
+</style>
+</head>
+<body>
+<!-- ============================= -->
+<!-- TELAS INICIAM AQUI            -->
+<!-- ============================= -->
+
+<!-- ========== TELA 1 (CARTA) ========== -->
+<div id="tela1" class="tela show">
+    <div style="text-align:center;">
+        <button class="heart-button" id="heartBtn">❤️</button>
+        <p>Clique aqui</p>
+    </div>
+
+    <div class="envelope" id="envelope"></div>
+
+    <div class="card" id="card">
+        <h1>Para Você ❤️</h1>
+
+        <p>
+            (AQUI VAI SUA CARTA COMPLETA, DO JEITO QUE VOCÊ TINHA)
+        </p>
+
+        <div class="gallery">
+            <img id="currentImage" src="assets/foto1.jpg">
+        </div>
+
+        <button onclick="proximaTela(1)">PRÓXIMO ➜</button>
+    </div>
+
+    <audio id="bgMusic" src="assets/music.mp3"></audio>
+</div>
+
+<!-- ========== TELA 2 (JOGUINHO) ========== -->
+<div id="tela2" class="tela hidden">
+    <h2>Leve a bolinha até o quadrado verde!</h2>
+    <p>(Use as setas do teclado)</p>
+
+    <div id="gameArea">
+        <div id="player"></div>
+        <div id="goal"></div>
+    </div>
+
+    <button id="btnProximoJogo" class="hidden" onclick="proximaTela(2)">PRÓXIMO ➜</button>
+</div>
+
+<!-- ========== TELA 3 (PERGUNTA) ========== -->
+<div id="tela3" class="tela hidden">
+    <h2>Qual foi a data que a gente se conheceu?</h2>
+
+    <button class="quiz-btn" onclick="verificar('A')">A - 11 de outubro de 2025</button>
+    <button class="quiz-btn" onclick="verificar('B')">B - 14 de outubro de 2025</button>
+    <button class="quiz-btn" onclick="verificar('C')">C - 13 de outubro de 2025</button>
+    <button class="quiz-btn" onclick="verificar('D')">D - 15 de outubro de 2025</button>
+
+    <p id="feedback"></p>
+
+    <button id="btnProximoQuiz" class="hidden" onclick="proximaTela(3)">PRÓXIMO ➜</button>
+</div>
+
+<!-- ========== TELA 4 (PEDIDO DE NAMORO) ========== -->
+<div id="tela4" class="tela hidden">
+    <h1 class="title-love" id="typedTitle"></h1>
+
+    <p class="love-message" id="typedText"></p>
+
+    <h1 class="title-love">💍 Você aceita namorar comigo? 💍</h1>
+
+    <button class="btn-yes" onclick="respostaSim()">SIM ❤️</button>
+    <button class="btn-no" id="btnNao" onclick="respostaNao()">NÃO 😢</button>
+
+    <audio id="loveMusic" src="assets/romantic.mp3"></audio>
+
+    <img id="fotoFinal" src="assets/surpresa.jpg" style="display:none; margin-top:30px; width:80%; max-width:400px; border-radius:20px; box-shadow:0 0 20px #ff1a4baa;">
+</div>
+
+<!-- ============================= -->
+<!-- SCRIPTS                       -->
+<!-- ============================= -->
+<script>
+
+/* =========================== */
+/* FUNÇÃO PARA TROCAR TELAS   */
+/* =========================== */
+
+function proximaTela(n) {
+    document.getElementById(`tela${n}`).classList.remove("show");
+    setTimeout(() => {
+        document.getElementById(`tela${n}`).classList.add("hidden");
+        const next = document.getElementById(`tela${n+1}`);
+        next.classList.remove("hidden");
+        setTimeout(() => next.classList.add("show"), 20);
+    }, 600);
+
+    if (n+1 === 4) {
+        document.getElementById("loveMusic").play();
+        iniciarDigitacao();
+        iniciarCorações();
+    }
+}
+
+/* =========================== */
+/* CARTA                       */
+/* =========================== */
+
+let images = [
+    "assets/foto1.jpg",
+    "assets/foto2.jpg",
+    "assets/foto3.jpg"
+];
+
+let idx = 0;
+
+document.getElementById("heartBtn").onclick = () => {
+    document.getElementById("heartBtn").style.display = "none";
+
+    const env = document.getElementById("envelope");
+    env.style.opacity = "1";
+
+    setTimeout(() => env.classList.add("open"), 700);
+
+    setTimeout(() => {
+        document.getElementById("card").style.display = "block";
+    }, 1600);
+
+    document.getElementById("bgMusic").play();
+
+    setInterval(() => {
+        idx = (idx + 1) % images.length;
+        document.getElementById("currentImage").src = images[idx];
+    }, 3000);
+};
+
+/* =========================== */
+/* JOGUINHO                    */
+/* =========================== */
+
+let player = document.getElementById("player");
+let goal   = document.getElementById("goal");
+let btnJogo = document.getElementById("btnProximoJogo");
+
+document.addEventListener("keydown", (e) => {
+    let t = parseInt(player.style.top);
+    let l = parseInt(player.style.left);
+
+    if (e.key === "ArrowUp")    player.style.top  = (t - 10) + "px";
+    if (e.key === "ArrowDown")  player.style.top  = (t + 10) + "px";
+    if (e.key === "ArrowLeft")  player.style.left = (l - 10) + "px";
+    if (e.key === "ArrowRight") player.style.left = (l + 10) + "px";
+
+    let p = player.getBoundingClientRect();
+    let g = goal.getBoundingClientRect();
+
+    if (!(p.right < g.left || p.left > g.right || p.bottom < g.top || p.top > g.bottom)) {
+        btnJogo.classList.remove("hidden");
+    }
+});
+
+/* =========================== */
+/* PERGUNTA                    */
+/* =========================== */
+
+function verificar(r) {
+    if (r === "C") {
+        document.getElementById("feedback").innerText = "ACERTOU ❤️";
+        document.getElementById("btnProximoQuiz").classList.remove("hidden");
+    } else {
+        document.getElementById("feedback").innerText =
+            "Resposta errada, não acredito que você errou isso, tente novamente sua cagona 😡😂";
+    }
+}
+
+/* =========================== */
+/* TEXTO DIGITADO              */
+/* =========================== */
+
+function iniciarDigitacao() {
+    let title = "💖 Eu tenho algo muito importante pra te pedir... 💖";
+    let text  = "Desde que você entrou na minha vida, tudo ficou mais leve, mais bonito e muito mais verdadeiro. Você trouxe cor, calma e sorriso para os meus dias. E agora... eu quero dar um passo ainda mais especial com você.";
+
+    digitar("typedTitle", title, 40, () => {
+        digitar("typedText", text, 25);
+    });
+}
+
+function digitar(id, frase, velocidade, callback=null) {
+    let i = 0;
+    let elem = document.getElementById(id);
+    elem.innerHTML = "";
+
+    let intervalo = setInterval(() => {
+        elem.innerHTML += frase[i];
+        i++;
+        if (i >= frase.length) {
+            clearInterval(intervalo);
+            if (callback) callback();
+        }
+    }, velocidade);
+}
+
+/* =========================== */
+/* CORAÇÕES SUBINDO            */
+/* =========================== */
+
+function iniciarCorações() {
+    setInterval(() => {
+        const h = document.createElement("div");
+        h.innerHTML = "❤️";
+        h.className = "heart-floating";
+        h.style.left = Math.random()*100 + "vw";
+        h.style.fontSize = (Math.random()*20+10) + "px";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),6000);
+    }, 300);
+}
+
+/* =========================== */
+/* BOTÃO "NÃO" FUGINDO         */
+/* =========================== */
+
+const btnNao = document.getElementById("btnNao");
+btnNao.addEventListener("mouseover", () => {
+    btnNao.style.position = "absolute";
+    btnNao.style.left = Math.random()*70 + "%";
+    btnNao.style.top  = Math.random()*60 + "%";
+});
+
+/* =========================== */
+/* FOGOS DE ARTIFÍCIO          */
+/* =========================== */
+
+function fogos() {
+    for (let i=0; i<20; i++) {
+        let f = document.createElement("div");
+        f.className = "firework";
+        f.style.left = (Math.random()*100) + "vw";
+        f.style.top  = (Math.random()*100) + "vh";
+        f.style.background = `hsl(${Math.random()*360},100%,50%)`;
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1000);
+    }
+}
+
+/* =========================== */
+/* RESPOSTAS                   */
+/* =========================== */
+
+function respostaSim() {
+    fogos();  
+    document.getElementById("fotoFinal").style.display = "block";
+}
+
+function respostaNao() {
+    alert("Resposta inválida. Tente novamente 😤 (clica no SIM kkk)");
+}
+
+</script>
+
+</body>
+</html>
