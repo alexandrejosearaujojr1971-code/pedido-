@@ -5,22 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Você ❤️</title>
 <style>
-    body{margin:0;padding:0;background:#0b0b0b;color:#e63946;font-family:Georgia, serif;overflow-x:hidden;}
-    .tela{display:none;padding:20px;}
-    .tela.active{display:block;}
-    h1,h2{text-align:center;color:#ff0033;}
-    p{color:#ffffffcc;font-size:1.2rem;line-height:1.7rem;text-align:justify;}
-    .botao{padding:10px 25px;margin:10px;font-size:18px;background:#000;color:#00f;border:2px solid #00f;border-radius:8px;cursor:pointer;transition:.3s;}
-    .botao:hover{background:#00f;color:#000;}
-    /* LABIRINTO */
-    #labirinto{position:relative;width:320px;height:320px;margin:20px auto;background:#222;border:3px solid #e63946;}
-    .parede{position:absolute;background:#ff0033;}
-    #bola{position:absolute;width:20px;height:20px;background:green;border-radius:50%;top:270px;left:10px;}
-    #objetivo{position:absolute;width:20px;height:20px;background:gold;top:10px;right:10px;}
-    /* PEDIDO NAMORO */
-    #pedido h1{font-size:2rem;text-align:center;color:#ff69b4;text-shadow: 2px 2px 5px #ff0033;}
-    #pedido p{color:#fff;font-size:1.5rem;text-align:center;margin:20px 0;}
-    .firework{position:absolute;width:5px;height:5px;background:yellow;border-radius:50%;pointer-events:none;}
+body{margin:0;padding:0;background:#0b0b0b;color:#e63946;font-family:Georgia, serif;overflow-x:hidden;}
+.tela{display:none;padding:20px;}
+.tela.active{display:block;}
+h1,h2{text-align:center;color:#ff0033;}
+p{color:#ffffffcc;font-size:1.2rem;line-height:1.7rem;text-align:justify;}
+.botao{padding:10px 25px;margin:10px;font-size:18px;background:#000;color:#00f;border:2px solid #00f;border-radius:8px;cursor:pointer;transition:.3s;}
+.botao:hover{background:#00f;color:#000;}
+/* LABIRINTO */
+#labirinto{position:relative;width:320px;height:320px;margin:20px auto;background:#222;border:3px solid #e63946;}
+.parede{position:absolute;background:#ff0033;}
+#bola{position:absolute;width:20px;height:20px;background:green;border-radius:50%;top:270px;left:10px;}
+#objetivo{position:absolute;width:20px;height:20px;background:gold;top:10px;right:10px;}
+/* PEDIDO NAMORO */
+#pedido h1{font-size:2rem;text-align:center;color:#ff69b4;text-shadow: 2px 2px 5px #ff0033;}
+#pedido p{color:#fff;font-size:1.5rem;text-align:center;margin:20px 0;}
+.firework{position:absolute;width:5px;height:5px;background:yellow;border-radius:50%;pointer-events:none;}
+/* TELA 6 */
+@keyframes fadeText {0% {opacity:0; transform:translateY(20px);} 100% {opacity:1; transform:translateY(0);}}
 </style>
 </head>
 <body>
@@ -30,25 +32,26 @@
     <h1>Para Você ❤️</h1>
     <p>
         A gente se conhece há tão pouco tempo, e mesmo assim, cada dia ao seu lado tem sido incrível...
-        <!-- texto completo da carta -->
+        <!-- mantenha o texto completo da carta -->
     </p>
     <div style="text-align:center;margin-top:40px;">
         <button class="botao" id="btnProximo1">PRÓXIMO ➜</button>
     </div>
 </div>
 
-<!-- TELA 2: LABIRINTO -->
+<!-- TELA 2: LABIRINTO VISÍVEL COM BRECHAS -->
 <div id="tela2" class="tela">
-    <h2>Joguinho: Leve a bolinha até o objetivo 🟡</h2>
+    <h2 style="text-align:center;">Joguinho: Leve a bolinha até o objetivo 🟡</h2>
     <div id="labirinto">
-        <div class="parede" style="top:50px; left:0; width:250px; height:10px;"></div>
-        <div class="parede" style="top:120px; left:70px; width:250px; height:10px;"></div>
-        <div class="parede" style="top:190px; left:0; width:250px; height:10px;"></div>
-        <div class="parede" style="top:260px; left:70px; width:250px; height:10px;"></div>
-        <div class="parede" style="top:0; left:60px; width:10px; height:50px;"></div>
-        <div class="parede" style="top:120px; left:150px; width:10px; height:70px;"></div>
-        <div class="parede" style="top:190px; left:60px; width:10px; height:70px;"></div>
-        <div class="parede" style="top:260px; left:150px; width:10px; height:60px;"></div>
+        <!-- Paredes com brechas -->
+        <div class="parede" style="top:50px; left:0; width:120px; height:10px;"></div>
+        <div class="parede" style="top:50px; left:150px; width:170px; height:10px;"></div>
+        <div class="parede" style="top:120px; left:0; width:100px; height:10px;"></div>
+        <div class="parede" style="top:120px; left:140px; width:180px; height:10px;"></div>
+        <div class="parede" style="top:190px; left:20px; width:100px; height:10px;"></div>
+        <div class="parede" style="top:190px; left:150px; width:150px; height:10px;"></div>
+        <div class="parede" style="top:260px; left:0; width:140px; height:10px;"></div>
+        <div class="parede" style="top:260px; left:180px; width:140px; height:10px;"></div>
         <div id="bola"></div>
         <div id="objetivo"></div>
     </div>
@@ -84,14 +87,23 @@
     <p>Mesmo se tentasse clicar "NÃO", não conseguiria kkk</p>
 </div>
 
-<script>
-// FUNÇÃO DE NAVEGAÇÃO
-function showTela(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');}
+<!-- TELA 6: APÓS ACEITAR O NAMORO -->
+<div id="tela6" class="tela">
+    <h2 style="text-align:center; color:#ff69b4; text-shadow:2px 2px 5px #ff0033;">Que bom que aceitou ❤️</h2>
+    <div style="text-align:center; margin-top:20px;">
+        <img src="assets/foto2.jpg" alt="Foto do casal" style="width:60%; max-width:400px; border-radius:12px; box-shadow:0 0 20px #ff69b4;">
+        <p style="color:#fff; font-size:1.4rem; margin-top:15px; animation:fadeText 2s ease-in-out;">
+            Quero ter uma vida feliz e leve contigo 💖
+        </p>
+    </div>
+</div>
 
-// TELA 1
+<script>
+// NAVEGAÇÃO
+function showTela(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');}
 document.getElementById('btnProximo1').onclick = ()=>showTela('tela2');
 
-// TELA 2: LABIRINTO
+// LABIRINTO
 const bola = document.getElementById("bola");
 const objetivo = document.getElementById("objetivo");
 const btnProximoLab = document.getElementById("btnProximoLab");
@@ -99,17 +111,13 @@ const lab = document.getElementById("labirinto");
 const vel = 10;
 let pos = {x:10, y:270};
 function mover(dx, dy){
-    let nx = pos.x + dx;
-    let ny = pos.y + dy;
+    let nx = pos.x + dx; let ny = pos.y + dy;
     nx = Math.max(0, Math.min(nx, lab.clientWidth - 20));
     ny = Math.max(0, Math.min(ny, lab.clientHeight - 20));
     pos.x = nx; pos.y = ny;
     bola.style.left = pos.x + "px"; bola.style.top = pos.y + "px";
-    // Checa se chegou no objetivo
     const objX = objetivo.offsetLeft; const objY = objetivo.offsetTop;
-    if(pos.x + 20 > objX && pos.x < objX + 20 && pos.y + 20 > objY && pos.y < objY + 20){
-        btnProximoLab.style.display = "inline-block";
-    }
+    if(pos.x + 20 > objX && pos.x < objX + 20 && pos.y + 20 > objY && pos.y < objY + 20){btnProximoLab.style.display="inline-block";}
 }
 document.addEventListener("keydown", e=>{
     if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)){
@@ -127,14 +135,12 @@ lab.addEventListener("touchmove", e=>{
     const touch = e.touches[0];
     const dx = touch.clientX - startTouch.clientX;
     const dy = touch.clientY - startTouch.clientY;
-    if(Math.abs(dx)>Math.abs(dy)){mover(dx>0?vel:-vel,0);}
-    else{mover(0,dy>0?vel:-vel);}
-    startTouch=touch;
-    e.preventDefault();
+    if(Math.abs(dx)>Math.abs(dy)){ mover(dx>0?vel:-vel,0);}else{ mover(0,dy>0?vel:-vel);}
+    startTouch = touch; e.preventDefault();
 });
 btnProximoLab.onclick = ()=>showTela('tela3');
 
-// TELA 3: PERGUNTA
+// PERGUNTA
 document.querySelectorAll('#tela3 .botao').forEach(btn=>{
     btn.onclick = ()=>{
         if(btn.dataset.resposta==="C"){showTela('pedido');}
@@ -142,7 +148,7 @@ document.querySelectorAll('#tela3 .botao').forEach(btn=>{
     };
 });
 
-// TELA 4: PEDIDO NAMORO
+// PEDIDO NAMORO
 const btnSim = document.getElementById('btnSim');
 const btnNao = document.getElementById('btnNao');
 btnNao.onclick = ()=>{
@@ -151,7 +157,6 @@ btnNao.onclick = ()=>{
     btnNao.style.left=Math.random()*80+"%";
 };
 btnSim.onclick = ()=>{
-    // Fogos simples
     for(let i=0;i<50;i++){
         const f=document.createElement('div');
         f.className='firework';
@@ -161,7 +166,7 @@ btnSim.onclick = ()=>{
         document.body.appendChild(f);
         setTimeout(()=>f.remove(),1000);
     }
-    setTimeout(()=>showTela('tela5'),1500);
+    setTimeout(()=>showTela('tela6'),1500);
 };
 </script>
 
