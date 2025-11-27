@@ -3,37 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedido Especial ❤️</title>
+    <title>Para Você ❤️</title>
     <style>
-        body {margin:0; padding:0; background:#0b0b0b; color:#e63946; font-family:Georgia, serif; overflow-x:hidden;}
+        body {margin:0; padding:0; background:#0b0b0b; color:#e63946; font-family:"Georgia", serif; overflow-x:hidden;}
         h1,h2 {text-align:center; color:#ff0033;}
-        p {color:#fff; font-size:1.2rem; line-height:1.7rem; text-align:justify;}
-        button {padding:10px 20px; font-size:1.2rem; cursor:pointer; border:2px solid #1e90ff; background:#0000; color:#1e90ff; border-radius:8px; transition:0.3s;}
-        button:hover {background:#1e90ff; color:#000;}
+        p {color:#ffffffcc; font-size:1.2rem; line-height:1.7rem; text-align:justify;}
+        .tela {display:none; padding:20px;}
+        .botao {background:#001f3f; color:#00f; border:2px solid #00f; padding:10px 20px; font-size:1.2rem; cursor:pointer; border-radius:6px; margin-top:20px;}
+        .botao:hover {background:#003366; color:#0ff;}
+        .heart-container {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%); text-align:center;}
         .heart-button {background:none; border:none; cursor:pointer; font-size:5rem; color:#ff0033; animation:pulse 1.3s infinite; transition:0.3s;}
         .heart-button:hover {transform:scale(1.2);}
         @keyframes pulse {0%{transform:scale(1);}50%{transform:scale(1.15);}100%{transform:scale(1);}}
-        .heart-container {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
         .click-text {color:#ff0033; font-size:1.2rem; margin-top:10px;}
-        .card {opacity:0; margin:50px auto; max-width:750px; padding:35px; background:#111; border:2px solid #e63946; border-radius:14px; box-shadow:0 0 40px #e6394666; animation:fadeIn 1.5s ease forwards; animation-delay:1.2s; display:none;}
+        .card {opacity:0; margin:50px auto; max-width:750px; padding:35px; background:#111; border:2px solid #e63946; border-radius:14px; box-shadow:0 0 40px #e6394666; animation:fadeIn 1.5s ease forwards; display:none;}
         @keyframes fadeIn {from{opacity:0; transform:translateY(40px);} to{opacity:1; transform:translateY(0);}}
         .gallery {margin-top:20px; text-align:center;}
         .gallery img {width:80%; max-width:600px; border-radius:12px; box-shadow:0 0 20px #e63946aa; transition:opacity 1s ease-in-out;}
         .footer {text-align:center; margin-top:20px; color:#ff0033; font-style:italic;}
         .floating-heart {position:fixed; bottom:-10px; font-size:18px; color:#ff0033aa; animation:float 6s linear infinite; z-index:-1;}
         @keyframes float {0%{transform:translateY(0) translateX(0); opacity:1;}100%{transform:translateY(-120vh) translateX(30px); opacity:0;}}
-        #labirinto .parede {position:absolute; background:#e63946;}
-        #labirinto #bola {position:absolute; width:20px; height:20px; background:green; border-radius:50%;}
-        #labirinto #objetivo {position:absolute; width:20px; height:20px; background:gold;}
-        .tela {display:none; padding:20px;}
-        #touchControls button{font-size:1.5rem; width:60px; height:60px; border:2px solid #1e90ff; border-radius:10px; background:#0000; color:#1e90ff;}
-        #touchControls2 button{font-size:1.5rem; width:60px; height:60px; border:2px solid #1e90ff; border-radius:10px; background:#0000; color:#1e90ff;}
+        /* Labirinto */
+        .parede {position:absolute; background:#e63946;}
+        #labirinto {position:relative; margin:20px auto; width:320px; height:320px; background:#111; border:2px solid #e63946; touch-action:none;}
+        #bola {position:absolute; width:20px; height:20px; background:green; border-radius:50%; top:10px; left:10px;}
+        #objetivo {position:absolute; width:20px; height:20px; background:gold; bottom:10px; right:10px;}
     </style>
 </head>
 <body>
 
-<!-- Tela 1: Carta -->
-<div id="tela1">
+<!-- TELA 1 - CARTA INICIAL -->
+<div id="tela1" class="tela" style="display:block;">
     <div class="heart-container">
         <button class="heart-button" id="heartBtn">❤️</button>
         <div class="click-text">Clique aqui</div>
@@ -41,110 +41,75 @@
     <div class="card" id="card">
         <h1>Para Você ❤️</h1>
         <p>
-            A gente se conhece há tão pouco tempo, e mesmo assim, cada dia ao seu lado tem sido incrível.  
-            Cada momento que passa, eu gosto ainda mais de você.  
-            Sei que tenho meus defeitos, penso demais às vezes, mas a cada dia me sinto mais tranquilo e seguro com você.<br><br>
-            Sei que já falei aquelas frases meio clichês, tipo "vai passar a vida toda comigo"… mas é sério, kkk.  
+            A gente se conhece há tão pouco tempo, e mesmo assim, cada dia ao seu lado tem sido incrível.
+            Cada momento que passa, eu gosto ainda mais de você.<br><br>
+            Sei que já falei aquelas frases meio clichês, tipo "vai passar a vida toda comigo"… mas é sério, kkk.
             Tudo que eu puder fazer para que isso aconteça, eu farei.<br><br>
-            Esse pequeno presente é só uma forma de carinho, um jeito de te mostrar o quanto você é especial para mim.  
-            Feliz aniversário, minha gostosa ❤️
+            Esse pequeno presente é só uma forma de carinho, um jeito de te mostrar o quanto você é especial para mim.
         </p>
         <div class="gallery">
             <img id="currentImage" src="assets/foto1.jpg" alt="Memória">
         </div>
-        <div class="footer">
-            Com carinho, de alguém que está gostando muito de você ❤️
-        </div>
-        <div style="text-align:center; margin-top:20px;">
-            <button id="btnProximo1">PRÓXIMO ➜</button>
-        </div>
+        <div class="footer">Com carinho, de alguém que está gostando muito de você ❤️</div>
+    </div>
+    <div style="text-align:center; margin-top:20px;">
+        <button id="btnProximo1" class="botao">PRÓXIMO ➜</button>
     </div>
 </div>
 
-<!-- Tela 2: Labirinto -->
+<!-- TELA 2 - LABIRINTO -->
 <div id="tela2" class="tela">
     <h2>Joguinho: Leve a bolinha até o objetivo 🟡</h2>
-    <div id="labirinto" style="position: relative; margin: 20px auto; width: 320px; height: 320px; background:#111; border:2px solid #e63946;">
-        <div class="parede" style="top:50px; left:0; width:220px; height:10px;"></div>
-        <div class="parede" style="top:100px; left:100px; width:220px; height:10px;"></div>
-        <div class="parede" style="top:150px; left:0; width:180px; height:10px;"></div>
-        <div class="parede" style="top:200px; left:140px; width:180px; height:10px;"></div>
-        <div class="parede" style="top:250px; left:0; width:200px; height:10px;"></div>
-        <div class="parede" style="top:300px; left:120px; width:200px; height:10px;"></div>
-        <div class="parede" style="top:0; left:50px; width:10px; height:80px;"></div>
-        <div class="parede" style="top:80px; left:150px; width:10px; height:80px;"></div>
-        <div class="parede" style="top:160px; left:60px; width:10px; height:80px;"></div>
-        <div class="parede" style="top:240px; left:160px; width:10px; height:80px;"></div>
-        <div id="bola" style="top:10px; left:10px;"></div>
+    <div id="labirinto">
+        <div class="parede" style="top:40px; left:0; width:250px; height:10px;"></div>
+        <div class="parede" style="top:100px; left:70px; width:250px; height:10px;"></div>
+        <div class="parede" style="top:160px; left:0; width:250px; height:10px;"></div>
+        <div class="parede" style="top:220px; left:70px; width:250px; height:10px;"></div>
+        <div class="parede" style="top:0; left:50px; width:10px; height:60px;"></div>
+        <div class="parede" style="top:80px; left:150px; width:10px; height:60px;"></div>
+        <div class="parede" style="top:160px; left:50px; width:10px; height:60px;"></div>
+        <div class="parede" style="top:220px; left:150px; width:10px; height:60px;"></div>
+        <div id="bola"></div>
         <div id="objetivo"></div>
     </div>
-    <div id="touchControls" style="position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:10;">
-        <button class="touchBtn" data-dir="up">⬆️</button>
-    </div>
-    <div id="touchControls2" style="position:fixed; bottom:90px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:10;">
-        <button class="touchBtn" data-dir="left">⬅️</button>
-        <button class="touchBtn" data-dir="down">⬇️</button>
-        <button class="touchBtn" data-dir="right">➡️</button>
-    </div>
     <div style="text-align:center; margin-top:20px;">
-        <button id="btnProximoLab" style="display:none;">PRÓXIMO ➜</button>
+        <button id="btnProximoLab" class="botao" style="display:none;">PRÓXIMO ➜</button>
     </div>
 </div>
 
-<!-- Tela 3: Pergunta -->
+<!-- TELA 3 - PERGUNTA -->
 <div id="tela3" class="tela">
     <h2>Qual foi a data que a gente se conheceu?</h2>
-    <div style="text-align:center; margin-top:20px;">
-        <button class="resposta" data-res="A">Dia 11 de outubro de 2025</button>
-        <button class="resposta" data-res="B">Dia 14 de outubro de 2025</button>
-        <button class="resposta" data-res="C">Dia 13 de outubro de 2025</button>
-        <button class="resposta" data-res="D">Dia 15 de outubro de 2025</button>
+    <div style="text-align:center;">
+        <button class="botao" onclick="checarResposta('A')">A) 11 de outubro de 2025</button><br><br>
+        <button class="botao" onclick="checarResposta('B')">B) 14 de outubro de 2025</button><br><br>
+        <button class="botao" onclick="checarResposta('C')">C) 13 de outubro de 2025</button><br><br>
+        <button class="botao" onclick="checarResposta('D')">D) 15 de outubro de 2025</button>
     </div>
 </div>
 
-<!-- Tela 4: Pedido de namoro -->
-<div id="tela4" class="tela" style="text-align:center;">
-    <h2>Eu tô gostando muito de você…</h2>
-    <p>Então FODASE, vou pedir mesmo! ❤️🔥<br> Aceita namorar comigo, Byanca Brytiney da Silva, vulgo amor da minha vida?</p>
-    <button id="btnSim">SIM 😍</button>
-    <button id="btnNao">NÃO 😭</button>
-    <div id="btnProximoFinal" style="display:none; margin-top:20px;">
-        <button>PRÓXIMO ➜</button>
+<!-- TELA 4 - PEDIDO DE NAMORO -->
+<div id="tela4" class="tela">
+    <h1>Eu tô gostando muito de você 😍</h1>
+    <p>Então FODASE! VOU PEDIR: Aceita namorar comigo?<br>Byanca Brytiney da Silva, vulgo Amor da Minha Vida ❤️</p>
+    <div style="text-align:center;">
+        <button id="btnSim" class="botao">SIM</button>
+        <button id="btnNao" class="botao">NÃO</button>
     </div>
 </div>
 
-<!-- Tela 5: Final engraçado -->
-<div id="tela5" class="tela" style="text-align:center; padding:40px; color:#ff0033; font-family:Georgia, serif;">
-    <h1>Mesmo se você tentasse colocar "NÃO"… 😏</h1>
-    <p style="font-size:1.4rem; max-width:700px; margin:auto; margin-top:20px; line-height:2rem;">
-        …não iria conseguir kkkkk 💋<br>
-        Vai tentar fazer o teste?<br>
-        Ou namora, ou namora.<br>
-        Você já é minha, b. Agora é oficial.<br>
-        Beijos 😘🔥
-    </p>
+<!-- TELA 5 - MENSAGEM FINAL -->
+<div id="tela5" class="tela">
+    <h1>kkkk mesmo se você tentasse colocar "não" não conseguiria 😎</h1>
+    <p>Vai tentar fazer o teste? Ou namora ou namora. Você já é minha B, agora é oficial. Beijos ❤️</p>
 </div>
 
 <script>
-    // Corações flutuando
-    function floatingHeart() {
-        const h = document.createElement("div");
-        h.className = "floating-heart";
-        h.innerHTML = "❤️";
-        h.style.left = Math.random() * 100 + "vw";
-        h.style.fontSize = (Math.random() * 20 + 10) + "px";
-        h.style.animationDuration = (Math.random() * 4 + 3) + "s";
-        document.body.appendChild(h);
-        setTimeout(() => h.remove(), 7000);
-    }
-    setInterval(floatingHeart, 500);
-
-    // Tela 1 - abrir carta e galeria
+    // Tela 1
     const heartBtn = document.getElementById("heartBtn");
     const card = document.getElementById("card");
     const btnProximo1 = document.getElementById("btnProximo1");
     heartBtn.onclick = ()=>{
-        heartBtn.parentElement.style.display="none";
         card.style.display="block";
     }
     btnProximo1.onclick = ()=>{
@@ -158,83 +123,85 @@
     const btnProximoLab = document.getElementById("btnProximoLab");
     const vel = 10;
     let pos = {x:10,y:10};
+    const paredes = Array.from(document.querySelectorAll("#labirinto .parede"));
+    const labRect = document.getElementById("labirinto").getBoundingClientRect();
+
+    function checarColisao(x,y){
+        for(let p of paredes){
+            const rect = p.getBoundingClientRect();
+            const bx = labRect.left + x, by = labRect.top + y;
+            if(bx+20>rect.left && bx<rect.right && by+20>rect.top && by<rect.bottom) return true;
+        }
+        return false;
+    }
     function mover(dx,dy){
-        pos.x+=dx; pos.y+=dy;
-        if(pos.x<0) pos.x=0; if(pos.y<0) pos.y=0;
-        if(pos.x>300) pos.x=300; if(pos.y>300) pos.y=300;
-        bola.style.left=pos.x+"px"; bola.style.top=pos.y+"px";
-        if(Math.abs(pos.x-300)<20 && Math.abs(pos.y-300)<20){
-            btnProximoLab.style.display="block";
+        let nx=pos.x+dx, ny=pos.y+dy;
+        if(nx<0) nx=0; if(ny<0) ny=0;
+        if(nx>300) nx=300; if(ny>300) ny=300;
+        if(!checarColisao(nx,ny)){ pos.x=nx; pos.y=ny; bola.style.left=pos.x+"px"; bola.style.top=pos.y+"px"; }
+        const objRect = objetivo.getBoundingClientRect();
+        const bolaRect = bola.getBoundingClientRect();
+        if(!(bolaRect.right<objRect.left || bolaRect.left>objRect.right || bolaRect.bottom<objRect.top || bolaRect.top>objRect.bottom)){
+            btnProximoLab.style.display="inline-block";
         }
     }
-    document.addEventListener("keydown",(e)=>{
+    document.addEventListener("keydown", e=>{
         if(e.key=="ArrowUp") mover(0,-vel);
         if(e.key=="ArrowDown") mover(0,vel);
         if(e.key=="ArrowLeft") mover(-vel,0);
         if(e.key=="ArrowRight") mover(vel,0);
     });
-    // Touch controls
-    const touchBtns = document.querySelectorAll(".touchBtn");
-    touchBtns.forEach(btn=>{
-        btn.addEventListener("touchstart", ()=>{
-            const dir = btn.dataset.dir;
-            if(dir==="up") mover(0,-vel);
-            if(dir==="down") mover(0,vel);
-            if(dir==="left") mover(-vel,0);
-            if(dir==="right") mover(vel,0);
-        });
+    let startTouch=null;
+    const lab=document.getElementById("labirinto");
+    lab.addEventListener("touchstart",e=>{startTouch=e.touches[0];});
+    lab.addEventListener("touchmove",e=>{
+        if(!startTouch) return;
+        const touch=e.touches[0];
+        const dx=touch.clientX-startTouch.clientX;
+        const dy=touch.clientY-startTouch.clientY;
+        if(Math.abs(dx)>Math.abs(dy)) mover(dx>0?vel:-vel,0); else mover(0,dy>0?vel:-vel);
+        startTouch=touch;
+        e.preventDefault();
     });
     btnProximoLab.onclick = ()=>{
         document.getElementById("tela2").style.display="none";
         document.getElementById("tela3").style.display="block";
     }
 
-    // Tela 3 - pergunta
-    const respostas = document.querySelectorAll(".resposta");
-    respostas.forEach(btn=>{
-        btn.onclick = ()=>{
-            if(btn.dataset.res=="C"){
-                document.getElementById("tela3").style.display="none";
-                document.getElementById("tela4").style.display="block";
-            }else{
-                alert("Resposta errada, não acredito que você errou isso, tente novamente sua cagona 😜");
-            }
+    // Tela 3 - Pergunta
+    function checarResposta(resp){
+        if(resp==="C"){
+            document.getElementById("tela3").style.display="none";
+            document.getElementById("tela4").style.display="block";
+        }else{
+            alert("Resposta errada, não acredito que você errou isso, tente novamente sua cagona 😜");
         }
-    });
+    }
 
-    // Tela 4 - pedido namoro
-    const btnSim = document.getElementById("btnSim");
-    const btnNao = document.getElementById("btnNao");
-    const btnProximoFinal = document.querySelector("#btnProximoFinal button");
+    // Tela 4 - Pedido
+    const btnSim=document.getElementById("btnSim");
+    const btnNao=document.getElementById("btnNao");
     btnSim.onclick = ()=>{
-        iniciarFogos();
-        setTimeout(()=>{btnProximoFinal.style.display="inline-block";},3000);
+        // Fogos de artifício simples
+        for(let i=0;i<50;i++){
+            let f=document.createElement("div");
+            f.style.position="fixed";
+            f.style.width="5px"; f.style.height="5px"; f.style.backgroundColor="yellow";
+            f.style.left=Math.random()*window.innerWidth+"px";
+            f.style.top=Math.random()*window.innerHeight+"px";
+            f.style.borderRadius="50%";
+            document.body.appendChild(f);
+            setTimeout(()=>f.remove(),1500);
+        }
+        setTimeout(()=>{
+            document.getElementById("tela4").style.display="none";
+            document.getElementById("tela5").style.display="block";
+        },1500);
     }
     btnNao.onclick = ()=>{
-        alert("Não tem como dizer não 😏");
-    }
-    btnProximoFinal.onclick = ()=>{
-        document.getElementById("tela4").style.display="none";
-        document.getElementById("tela5").style.display="block";
-    }
-
-    function iniciarFogos(){
-        for(let i=0;i<20;i++){
-            setTimeout(()=>{
-                const boom=document.createElement("div");
-                boom.style.position="fixed";
-                boom.style.width="8px"; boom.style.height="8px"; boom.style.borderRadius="50%";
-                boom.style.left=Math.random()*window.innerWidth+"px";
-                boom.style.top=Math.random()*window.innerHeight+"px";
-                boom.style.background=`hsl(${Math.random()*360},100%,50%)`;
-                boom.style.boxShadow="0 0 20px white";
-                boom.style.transition="transform 1s, opacity 1s";
-                document.body.appendChild(boom);
-                setTimeout(()=>{boom.style.transform="scale(5)"; boom.style.opacity=0;},50);
-                setTimeout(()=>boom.remove(),1500);
-            },i*150);
-        }
+        alert("kkkk nem tente colocar NÃO 😎");
     }
 </script>
+
 </body>
 </html>
