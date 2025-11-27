@@ -1,490 +1,380 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Você ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Você ❤️</title>
 
-<style>
-/* =========================== */
-/* CONFIGURAÇÕES GERAIS        */
-/* =========================== */
+    <style>
+        /* ================== SEU CÓDIGO ORIGINAL ================== */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0b0b0b;
+            color: #e63946;
+            font-family: "Georgia", serif;
+            overflow-y: auto; /* Permite rolagem */
+        }
 
-body {
-    margin: 0;
-    padding: 0;
-    background: #0b0b0b;
-    color: #e63946;
-    font-family: "Georgia", serif;
-    overflow-x: hidden;
-}
+        .heart-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 5rem;
+            color: #ff0033;
+            animation: pulse 1.3s infinite;
+            transition: 0.3s;
+        }
 
-.hidden { display: none; }
+        .heart-button:hover {
+            transform: scale(1.2);
+        }
 
-button {
-    background: #e63946;
-    color: white;
-    padding: 12px 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 18px;
-    margin-top: 20px;
-    transition: 0.3s ease;
-}
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
 
-button:hover { transform: scale(1.05); }
+        .heart-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
 
-/* Transição suave entre telas */
-.tela {
-    opacity: 0;
-    transition: opacity 1s ease;
-}
-.tela.show {
-    opacity: 1;
-}
+        .click-text {
+            color: #ff0033;
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
 
-/* =========================== */
-/* TELA 1 - CARTA              */
-/* =========================== */
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background: #111;
+            border: 2px solid #e63946;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 8px;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: 1s ease;
+        }
 
-.heart-button {
-    font-size: 5rem;
-    background: none;
-    border: none;
-    color: #ff0033;
-    animation: pulse 1.3s infinite;
-    cursor: pointer;
-    margin-top: 80px;
-}
+        .envelope.open {
+            height: 0px;
+            opacity: 0;
+            transition: 1s ease;
+        }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-}
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, #8b0000, #300000);
+            clip-path: polygon(0 0, 100% 0, 50% 50%);
+        }
 
-.envelope {
-    width: 300px;
-    height: 200px;
-    background: #111;
-    border: 2px solid #e63946;
-    margin: 20px auto;
-    border-radius: 8px;
-    opacity: 0;
-    transition: 1s ease;
-    overflow: hidden;
-}
+        .card {
+            opacity: 0;
+            margin: 50px auto;
+            max-width: 750px;
+            padding: 35px;
+            background: #111;
+            border: 2px solid #e63946;
+            border-radius: 14px;
+            box-shadow: 0 0 40px #e6394666;
+            animation: fadeIn 1.5s ease forwards;
+            animation-delay: 1.2s;
+            display: none;
+        }
 
-.envelope.open {
-    height: 0px;
-    opacity: 0;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.card {
-    opacity: 0;
-    display: none;
-    margin: 30px auto;
-    max-width: 700px;
-    background: #111;
-    border: 2px solid #e63946;
-    padding: 20px;
-    border-radius: 14px;
-    animation: fade 1.5s forwards;
-}
+        h1 { text-align: center; color: #ff0033; font-size: 2.4rem; }
+        p { color: #ffffffcc; font-size: 1.2rem; line-height: 1.7rem; text-align: justify; }
 
-@keyframes fade {
-    from { opacity: 0; transform: translateY(40px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
+        .gallery { margin-top: 20px; text-align: center; }
+        .gallery img { width: 80%; max-width: 600px; border-radius: 12px; box-shadow: 0 0 20px #e63946aa; transition: opacity 1s ease-in-out; }
+        .footer { text-align: center; margin-top: 20px; color: #ff0033; font-style: italic; }
 
-.gallery img {
-    width: 80%;
-    max-width: 600px;
-    margin: auto;
-    display: block;
-    border-radius: 12px;
-    box-shadow: 0 0 20px #e63946aa;
-}
+        .floating-heart { position: fixed; bottom: -10px; font-size: 18px; color: #ff0033aa; animation: float 6s linear infinite; z-index: -1; }
+        @keyframes float { 0% { transform: translateY(0) translateX(0); opacity: 1; } 100% { transform: translateY(-120vh) translateX(30px); opacity: 0; } }
 
-/* =========================== */
-/* TELA 2 - JOGO DA BOLINHA    */
-/* =========================== */
+        /* ================== NOVAS TELAS ================== */
+        .tela { opacity: 0; transition: opacity 1s ease; }
+        .tela.show { opacity: 1; }
+        .hidden { display: none; }
 
-#gameArea {
-    margin: 40px auto;
-    width: 300px;
-    height: 300px;
-    background: #111;
-    border: 3px solid #e63946;
-    position: relative;
-}
+        /* ======= LABIRINTO / JOGO ======= */
+        #gameArea { margin: 40px auto; width: 300px; height: 300px; background: #111; border: 3px solid #e63946; position: relative; }
+        #player { width: 30px; height: 30px; background: #ff4d88; border-radius: 50%; position: absolute; top: 10px; left: 10px; }
+        #goal { width: 40px; height: 40px; background: #8aff8a; position: absolute; bottom: 10px; right: 10px; border-radius: 5px; }
+        .wall { position: absolute; background: #ff0033; border-radius: 5px; }
 
-#player {
-    width: 30px;
-    height: 30px;
-    background: #ff4d88;
-    border-radius: 50%;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
+        #mobileControls { text-align: center; margin-top: 20px; }
+        .arrow-btn { font-size: 2rem; padding: 15px 20px; margin: 5px; border-radius: 10px; background: #ff0033; color: white; border: none; cursor: pointer; box-shadow: 0 0 10px #ff0033aa; transition: transform 0.1s; }
+        .arrow-btn:active { transform: scale(1.1); }
 
-#goal {
-    width: 60px;
-    height: 60px;
-    background: #8aff8a;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    border-radius: 10px;
-}
+        /* ======= PERGUNTA ======= */
+        .quiz-btn { display: block; margin: 15px auto; width: 80%; max-width: 300px; background: #ff0033; padding: 12px; border-radius: 10px; color: white; border: none; cursor: pointer; }
 
-/* =========================== */
-/* TELA 3 - PERGUNTA           */
-/* =========================== */
+        /* ======= PEDIDO DE NAMORO ======= */
+        .title-love { font-size: 3rem; color: #ff1a4b; text-shadow: 0 0 20px #ff1a4baa; animation: pulse 2s infinite; text-align:center; }
+        .love-message { color: #fff; font-size: 1.4rem; max-width: 700px; margin: 20px auto; line-height: 1.8rem; text-align:center; }
+        .btn-yes { background: #ff1a4b; padding: 15px 30px; border-radius: 50px; font-size: 1.5rem; box-shadow: 0 0 20px #ff1a4ba8; cursor:pointer; margin-right:15px; }
+        .btn-no { background: #333; padding: 15px 30px; border-radius: 50px; font-size: 1.5rem; position: relative; cursor:pointer; }
 
-.quiz-btn {
-    display: block;
-    margin: 15px auto;
-    width: 80%;
-    max-width: 300px;
-    background: #ff0033;
-    padding: 12px;
-    border-radius: 10px;
-}
+        .heart-floating { position: fixed; bottom: -20px; font-size: 2rem; animation: floatUp 6s linear forwards; color: #ff4d88aa; }
+        @keyframes floatUp { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-120vh); opacity: 0; } }
 
-/* =========================== */
-/* TELA 4 - PEDIDO DE NAMORO   */
-/* =========================== */
+        .firework { position: fixed; width: 6px; height: 6px; border-radius: 50%; animation: explode 1s ease-out forwards; }
+        @keyframes explode { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(10); opacity: 0; } }
 
-#tela4 {
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.title-love {
-    font-size: 3rem;
-    color: #ff1a4b;
-    text-shadow: 0 0 20px #ff1a4baa;
-    animation: pulse 2s infinite;
-}
-
-.love-message {
-    color: #fff;
-    font-size: 1.4rem;
-    max-width: 700px;
-    margin: 20px auto;
-    line-height: 1.8rem;
-}
-
-.btn-yes {
-    background: #ff1a4b;
-    padding: 15px 30px;
-    border-radius: 50px;
-    font-size: 1.5rem;
-    box-shadow: 0 0 20px #ff1a4ba8;
-}
-
-.btn-no {
-    background: #333;
-    padding: 15px 30px;
-    border-radius: 50px;
-    font-size: 1.5rem;
-    margin-left: 20px;
-    position: relative;
-}
-
-/* =========================== */
-/* CORAÇÕES SUBINDO            */
-/* =========================== */
-
-.heart-floating {
-    position: fixed;
-    bottom: -20px;
-    font-size: 2rem;
-    animation: floatUp 6s linear forwards;
-    color: #ff4d88aa;
-}
-
-@keyframes floatUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-120vh); opacity: 0; }
-}
-
-/* =========================== */
-/* FOGOS DE ARTIFÍCIO          */
-/* =========================== */
-
-.firework {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    animation: explode 1s ease-out forwards;
-}
-
-@keyframes explode {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(10); opacity: 0; }
-}
-
-</style>
+    </style>
 </head>
 <body>
-<!-- ============================= -->
-<!-- TELAS INICIAM AQUI            -->
-<!-- ============================= -->
-
-<!-- ========== TELA 1 (CARTA) ========== -->
-<div id="tela1" class="tela show">
-    <div style="text-align:center;">
+    <!-- ================== CARTA ORIGINAL ================== -->
+    <div class="heart-container">
         <button class="heart-button" id="heartBtn">❤️</button>
-        <p>Clique aqui</p>
+        <div class="click-text">Clique aqui</div>
     </div>
-
     <div class="envelope" id="envelope"></div>
-
     <div class="card" id="card">
         <h1>Para Você ❤️</h1>
-
         <p>
-            (AQUI VAI SUA CARTA COMPLETA, DO JEITO QUE VOCÊ TINHA)
+            A gente se conhece há tão pouco tempo, e mesmo assim, cada dia ao seu lado tem sido incrível.  
+            Cada momento que passa, eu gosto ainda mais de você.  
+            Sei que tenho meus defeitos, penso demais às vezes, mas a cada dia me sinto mais tranquilo e seguro com você.<br><br>
+            Sei que já falei aquelas frases meio clichês, tipo "vai passar a vida toda comigo"… mas é sério, kkk.  
+            Tudo que eu puder fazer para que isso aconteça, eu farei.<br><br>
+            Esse pequeno presente é só uma forma de carinho, um jeito de te mostrar o quanto você é especial para mim.  
+            Feliz aniversário, minha gostosa ❤️
         </p>
-
         <div class="gallery">
-            <img id="currentImage" src="assets/foto1.jpg">
+            <img id="currentImage" src="assets/foto1.jpg" alt="Memória">
         </div>
-
-        <button onclick="proximaTela(1)">PRÓXIMO ➜</button>
+        <div class="footer">Com carinho, de alguém que está gostando muito de você ❤️</div>
     </div>
 
+    <!-- ÁUDIO -->
     <audio id="bgMusic" src="assets/music.mp3"></audio>
-</div>
 
-<!-- ========== TELA 2 (JOGUINHO) ========== -->
-<div id="tela2" class="tela hidden">
-    <h2>Leve a bolinha até o quadrado verde!</h2>
-    <p>(Use as setas do teclado)</p>
-
-    <div id="gameArea">
-        <div id="player"></div>
-        <div id="goal"></div>
+    <!-- ================== TELA 2 - MINI LABIRINTO ================== -->
+    <div id="tela2" class="tela hidden">
+      <h2 style="text-align:center;">Leve a bolinha até o quadrado verde!</h2>
+      <p style="text-align:center;">(Use as setas do teclado ou os botões abaixo)</p>
+      <div id="gameArea">
+          <div id="player"></div>
+          <div id="goal"></div>
+          <div class="wall" style="top:50px; left:0; width:200px; height:20px;"></div>
+          <div class="wall" style="top:120px; left:100px; width:200px; height:20px;"></div>
+          <div class="wall" style="top:200px; left:0; width:150px; height:20px;"></div>
+      </div>
+      <div id="mobileControls">
+          <button class="arrow-btn" data-dir="up">⬆️</button><br>
+          <button class="arrow-btn" data-dir="left">⬅️</button>
+          <button class="arrow-btn" data-dir="down">⬇️</button>
+          <button class="arrow-btn" data-dir="right">➡️</button>
+      </div>
+      <button id="btnProximoJogo" class="hidden" onclick="proximaTela(2)">PRÓXIMO ➜</button>
     </div>
 
-    <button id="btnProximoJogo" class="hidden" onclick="proximaTela(2)">PRÓXIMO ➜</button>
-</div>
+    <!-- ================== TELA 3 - PERGUNTA ================== -->
+    <div id="tela3" class="tela hidden">
+      <h2 style="text-align:center;">Qual foi a data que a gente se conheceu?</h2>
+      <button class="quiz-btn" onclick="verificar('A')">A - 11 de outubro de 2025</button>
+      <button class="quiz-btn" onclick="verificar('B')">B - 14 de outubro de 2025</button>
+      <button class="quiz-btn" onclick="verificar('C')">C - 13 de outubro de 2025</button>
+      <button class="quiz-btn" onclick="verificar('D')">D - 15 de outubro de 2025</button>
+      <p id="feedback" style="text-align:center; color:white; margin-top:10px;"></p>
+      <button id="btnProximoQuiz" class="hidden" onclick="proximaTela(3)">PRÓXIMO ➜</button>
+    </div>
 
-<!-- ========== TELA 3 (PERGUNTA) ========== -->
-<div id="tela3" class="tela hidden">
-    <h2>Qual foi a data que a gente se conheceu?</h2>
+    <!-- ================== TELA 4 - PEDIDO DE NAMORO ================== -->
+    <div id="tela4" class="tela hidden">
+      <h1 class="title-love" id="typedTitle"></h1>
+      <p class="love-message" id="typedText"></p>
+      <h1 class="title-love">💍 Você aceita namorar comigo? 💍</h1>
+      <div style="text-align:center;">
+        <button class="btn-yes" onclick="respostaSim()">SIM ❤️</button>
+        <button class="btn-no" id="btnNao">NÃO 😢</button>
+      </div>
+      <audio id="loveMusic" src="assets/romantic.mp3"></audio>
+      <img id="fotoFinal" src="assets/surpresa.jpg" style="display:none; margin-top:30px; width:80%; max-width:400px; border-radius:20px; box-shadow:0 0 20px #ff1a4baa;">
+    </div>
 
-    <button class="quiz-btn" onclick="verificar('A')">A - 11 de outubro de 2025</button>
-    <button class="quiz-btn" onclick="verificar('B')">B - 14 de outubro de 2025</button>
-    <button class="quiz-btn" onclick="verificar('C')">C - 13 de outubro de 2025</button>
-    <button class="quiz-btn" onclick="verificar('D')">D - 15 de outubro de 2025</button>
-
-    <p id="feedback"></p>
-
-    <button id="btnProximoQuiz" class="hidden" onclick="proximaTela(3)">PRÓXIMO ➜</button>
-</div>
-
-<!-- ========== TELA 4 (PEDIDO DE NAMORO) ========== -->
-<div id="tela4" class="tela hidden">
-    <h1 class="title-love" id="typedTitle"></h1>
-
-    <p class="love-message" id="typedText"></p>
-
-    <h1 class="title-love">💍 Você aceita namorar comigo? 💍</h1>
-
-    <button class="btn-yes" onclick="respostaSim()">SIM ❤️</button>
-    <button class="btn-no" id="btnNao" onclick="respostaNao()">NÃO 😢</button>
-
-    <audio id="loveMusic" src="assets/romantic.mp3"></audio>
-
-    <img id="fotoFinal" src="assets/surpresa.jpg" style="display:none; margin-top:30px; width:80%; max-width:400px; border-radius:20px; box-shadow:0 0 20px #ff1a4baa;">
-</div>
-
-<!-- ============================= -->
-<!-- SCRIPTS                       -->
-<!-- ============================= -->
-<script>
-
-/* =========================== */
-/* FUNÇÃO PARA TROCAR TELAS   */
-/* =========================== */
-
-function proximaTela(n) {
-    document.getElementById(`tela${n}`).classList.remove("show");
-    setTimeout(() => {
-        document.getElementById(`tela${n}`).classList.add("hidden");
-        const next = document.getElementById(`tela${n+1}`);
-        next.classList.remove("hidden");
-        setTimeout(() => next.classList.add("show"), 20);
-    }, 600);
-
-    if (n+1 === 4) {
-        document.getElementById("loveMusic").play();
-        iniciarDigitacao();
-        iniciarCorações();
-    }
-}
-
-/* =========================== */
-/* CARTA                       */
-/* =========================== */
-
-let images = [
-    "assets/foto1.jpg",
-    "assets/foto2.jpg",
-    "assets/foto3.jpg"
-];
-
-let idx = 0;
-
-document.getElementById("heartBtn").onclick = () => {
-    document.getElementById("heartBtn").style.display = "none";
-
-    const env = document.getElementById("envelope");
-    env.style.opacity = "1";
-
-    setTimeout(() => env.classList.add("open"), 700);
-
-    setTimeout(() => {
-        document.getElementById("card").style.display = "block";
-    }, 1600);
-
-    document.getElementById("bgMusic").play();
-
-    setInterval(() => {
-        idx = (idx + 1) % images.length;
-        document.getElementById("currentImage").src = images[idx];
-    }, 3000);
-};
-
-/* =========================== */
-/* JOGUINHO                    */
-/* =========================== */
-
-let player = document.getElementById("player");
-let goal   = document.getElementById("goal");
-let btnJogo = document.getElementById("btnProximoJogo");
-
-document.addEventListener("keydown", (e) => {
-    let t = parseInt(player.style.top);
-    let l = parseInt(player.style.left);
-
-    if (e.key === "ArrowUp")    player.style.top  = (t - 10) + "px";
-    if (e.key === "ArrowDown")  player.style.top  = (t + 10) + "px";
-    if (e.key === "ArrowLeft")  player.style.left = (l - 10) + "px";
-    if (e.key === "ArrowRight") player.style.left = (l + 10) + "px";
-
-    let p = player.getBoundingClientRect();
-    let g = goal.getBoundingClientRect();
-
-    if (!(p.right < g.left || p.left > g.right || p.bottom < g.top || p.top > g.bottom)) {
-        btnJogo.classList.remove("hidden");
-    }
-});
-
-/* =========================== */
-/* PERGUNTA                    */
-/* =========================== */
-
-function verificar(r) {
-    if (r === "C") {
-        document.getElementById("feedback").innerText = "ACERTOU ❤️";
-        document.getElementById("btnProximoQuiz").classList.remove("hidden");
-    } else {
-        document.getElementById("feedback").innerText =
-            "Resposta errada, não acredito que você errou isso, tente novamente sua cagona 😡😂";
-    }
-}
-
-/* =========================== */
-/* TEXTO DIGITADO              */
-/* =========================== */
-
-function iniciarDigitacao() {
-    let title = "💖 Eu tenho algo muito importante pra te pedir... 💖";
-    let text  = "Desde que você entrou na minha vida, tudo ficou mais leve, mais bonito e muito mais verdadeiro. Você trouxe cor, calma e sorriso para os meus dias. E agora... eu quero dar um passo ainda mais especial com você.";
-
-    digitar("typedTitle", title, 40, () => {
-        digitar("typedText", text, 25);
-    });
-}
-
-function digitar(id, frase, velocidade, callback=null) {
-    let i = 0;
-    let elem = document.getElementById(id);
-    elem.innerHTML = "";
-
-    let intervalo = setInterval(() => {
-        elem.innerHTML += frase[i];
-        i++;
-        if (i >= frase.length) {
-            clearInterval(intervalo);
-            if (callback) callback();
+    <!-- ================== SCRIPTS ================== -->
+    <script>
+        // ================== CORAÇÕES FLUTUANDO E GALERIA ORIGINAL ==================
+        function floatingHeart() {
+            const h = document.createElement("div");
+            h.className = "floating-heart";
+            h.innerHTML = "❤️";
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.fontSize = (Math.random() * 20 + 10) + "px";
+            h.style.animationDuration = (Math.random() * 4 + 3) + "s";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 7000);
         }
-    }, velocidade);
-}
+        setInterval(floatingHeart, 500);
 
-/* =========================== */
-/* CORAÇÕES SUBINDO            */
-/* =========================== */
+        const images = [
+          "assets/foto1.jpg","assets/foto2.jpg","assets/foto3.jpg"
+        ];
+        let currentIndex = 0;
+        const currentImage = document.getElementById("currentImage");
+        const bgMusic = document.getElementById("bgMusic");
 
-function iniciarCorações() {
-    setInterval(() => {
-        const h = document.createElement("div");
-        h.innerHTML = "❤️";
-        h.className = "heart-floating";
-        h.style.left = Math.random()*100 + "vw";
-        h.style.fontSize = (Math.random()*20+10) + "px";
-        document.body.appendChild(h);
-        setTimeout(()=>h.remove(),6000);
-    }, 300);
-}
+        function startGallery() {
+            document.querySelector(".heart-container").style.display = "none";
+            const env = document.getElementById("envelope");
+            env.style.opacity = "1";
+            env.style.pointerEvents = "auto";
+            setTimeout(() => env.classList.add("open"), 700);
+            setTimeout(() => document.getElementById("card").style.display = "block", 1700);
+            bgMusic.play();
+            setInterval(() => {
+                currentIndex++;
+                if(currentIndex >= images.length) currentIndex = 0;
+                currentImage.style.opacity = 0;
+                setTimeout(() => {
+                    currentImage.src = images[currentIndex];
+                    currentImage.style.opacity = 1;
+                }, 500);
+            }, 3000);
+        }
+        document.getElementById("heartBtn").onclick = startGallery;
 
-/* =========================== */
-/* BOTÃO "NÃO" FUGINDO         */
-/* =========================== */
+        // ================== TROCAR TELAS ==================
+        function proximaTela(n){
+          document.getElementById(`tela${n}`).classList.remove("show");
+          setTimeout(()=>{
+            document.getElementById(`tela${n}`).classList.add("hidden");
+            const next = document.getElementById(`tela${n+1}`);
+            next.classList.remove("hidden");
+            setTimeout(()=>next.classList.add("show"),20);
+          },600);
+          if(n+1===4){
+            document.getElementById("loveMusic").play();
+            iniciarDigitacao();
+            iniciarCorações();
+          }
+        }
 
-const btnNao = document.getElementById("btnNao");
-btnNao.addEventListener("mouseover", () => {
-    btnNao.style.position = "absolute";
-    btnNao.style.left = Math.random()*70 + "%";
-    btnNao.style.top  = Math.random()*60 + "%";
-});
+        // ================== MINI LABIRINTO ==================
+        const player = document.getElementById("player");
+        const goal = document.getElementById("goal");
+        const btnJogo = document.getElementById("btnProximoJogo");
+        const gameArea = document.getElementById("gameArea");
+        const step = 10;
+        const maxX = gameArea.clientWidth - player.offsetWidth;
+        const maxY = gameArea.clientHeight - player.offsetHeight;
 
-/* =========================== */
-/* FOGOS DE ARTIFÍCIO          */
-/* =========================== */
+        function moverPlayer(dir){
+          let top = parseInt(player.style.top) || 10;
+          let left = parseInt(player.style.left) || 10;
+          switch(dir){
+            case "up": top -= step; break;
+            case "down": top += step; break;
+            case "left": left -= step; break;
+            case "right": left += step; break;
+          }
+          if(top<0) top=0;
+          if(left<0) left=0;
+          if(top>maxY) top=maxY;
+          if(left>maxX) left=maxX;
+          player.style.top = top+"px";
+          player.style.left = left+"px";
 
-function fogos() {
-    for (let i=0; i<20; i++) {
-        let f = document.createElement("div");
-        f.className = "firework";
-        f.style.left = (Math.random()*100) + "vw";
-        f.style.top  = (Math.random()*100) + "vh";
-        f.style.background = `hsl(${Math.random()*360},100%,50%)`;
-        document.body.appendChild(f);
-        setTimeout(()=>f.remove(),1000);
-    }
-}
+          const playerRect = player.getBoundingClientRect();
+          const walls = document.querySelectorAll(".wall");
+          walls.forEach(w=>{
+            const wRect = w.getBoundingClientRect();
+            if(!(playerRect.right < wRect.left || playerRect.left > wRect.right || playerRect.bottom < wRect.top || playerRect.top > wRect.bottom)){
+              switch(dir){
+                case "up": top+=step; break;
+                case "down": top-=step; break;
+                case "left": left+=step; break;
+                case "right": left-=step; break;
+              }
+              player.style.top = top+"px";
+              player.style.left = left+"px";
+            }
+          });
 
-/* =========================== */
-/* RESPOSTAS                   */
-/* =========================== */
+          const goalRect = goal.getBoundingClientRect();
+          if(!(playerRect.right < goalRect.left || playerRect.left > goalRect.right || playerRect.bottom < goalRect.top || playerRect.top > goalRect.bottom)){
+            btnJogo.classList.remove("hidden");
+          }
+        }
 
-function respostaSim() {
-    fogos();  
-    document.getElementById("fotoFinal").style.display = "block";
-}
+        document.addEventListener("keydown",(e)=>{
+          const keyMap = {ArrowUp:"up",ArrowDown:"down",ArrowLeft:"left",ArrowRight:"right"};
+          if(keyMap[e.key]) moverPlayer(keyMap[e.key]);
+        });
+        document.querySelectorAll(".arrow-btn").forEach(btn=>{
+          btn.addEventListener("click",()=>{ moverPlayer(btn.getAttribute("data-dir")); });
+        });
 
-function respostaNao() {
-    alert("Resposta inválida. Tente novamente 😤 (clica no SIM kkk)");
-}
+        // ================== PERGUNTA ==================
+        function verificar(r){
+          if(r==="C"){
+            document.getElementById("feedback").innerText="ACERTOU! ❤️";
+            document.getElementById("btnProximoQuiz").classList.remove("hidden");
+          }else{
+            document.getElementById("feedback").innerText="Resposta errada, não acredito que você errou isso, tente novamente sua cagona 😅";
+          }
+        }
 
-</script>
+        // ================== PEDIDO DE NAMORO ==================
+        function iniciarDigitacao(){
+          const text = "Eu quero passar cada dia da minha vida com você, te fazer feliz e cuidar de você para sempre...";
+          const title = "Meu amor,";
+          const typedTitle = document.getElementById("typedTitle");
+          const typedText = document.getElementById("typedText");
+          let i=0,j=0;
+          const intervalTitle = setInterval(()=>{ if(j<title.length){ typedTitle.innerHTML+=title[j]; j++; } else clearInterval(intervalTitle); },100);
+          const intervalText = setInterval(()=>{ if(i<text.length){ typedText.innerHTML+=text[i]; i++; } else clearInterval(intervalText); },50);
+        }
 
+        function iniciarCorações(){
+          setInterval(()=>{
+            const h=document.createElement("div");
+            h.className="heart-floating";
+            h.innerText="❤️";
+            h.style.left=Math.random()*100+"vw";
+            document.body.appendChild(h);
+            setTimeout(()=>h.remove(),6000);
+          },400);
+        }
+
+        const btnNao=document.getElementById("btnNao");
+        btnNao.addEventListener("mouseover",()=>{ 
+          const maxX=window.innerWidth-btnNao.offsetWidth;
+          const maxY=window.innerHeight-btnNao.offsetHeight;
+          btnNao.style.left=Math.random()*maxX+"px";
+          btnNao.style.top=Math.random()*maxY+"px";
+          btnNao.style.position="absolute";
+        });
+
+        function respostaSim(){
+          const foto=document.getElementById("fotoFinal");
+          foto.style.display="block";
+          alert("😍 Que bom! Vamos ser felizes juntos!");
+        }
+    </script>
 </body>
 </html>
