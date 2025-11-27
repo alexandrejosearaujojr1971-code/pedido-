@@ -1,262 +1,240 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para byanca  ❤️</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        background: #0b0b0b;
-        color: #e63946;
-        font-family: "Georgia", serif;
-        overflow-x: hidden;
-    }
-
-    /* === Carta / Tela 1 === */
-    .card {
-        opacity: 0;
-        margin: 50px auto;
-        max-width: 750px;
-        padding: 35px;
-        background: #111;
-        border: 2px solid #e63946;
-        border-radius: 14px;
-        box-shadow: 0 0 40px #e6394666;
-        animation: fadeIn 1.5s ease forwards;
-        animation-delay: 1.2s;
-        display: none;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(40px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    h1 { text-align: center; color: #ff0033; font-size: 2.4rem; }
-    p { color: #ffffffcc; font-size: 1.2rem; line-height: 1.7rem; text-align: justify; }
-    .gallery { margin-top: 20px; text-align: center; }
-    .gallery img { width: 80%; max-width: 600px; border-radius: 12px; box-shadow: 0 0 20px #e63946aa; transition: opacity 1s ease-in-out; }
-    .footer { text-align: center; margin-top: 20px; color: #ff0033; font-style: italic; }
-
-    /* === Botões estilo azul escuro com contorno azul === */
-    button {
-        background: #001f3f; 
-        color: #00f; 
-        font-weight: bold;
-        border: 2px solid #00f; 
-        border-radius: 10px; 
-        padding: 12px 25px; 
-        font-size: 1.2rem; 
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    button:hover {
-        background: #004080;
-        color: #00f;
-    }
-
-    /* Botão PRÓXIMO fixo na parte inferior da tela */
-    #btnProximoCarta {
-        position: fixed; 
-        bottom: 20px; 
-        left: 50%; 
-        transform: translateX(-50%); 
-        z-index: 10;
-    }
-
-    /* === Floating Hearts === */
-    .floating-heart { position: fixed; bottom: -10px; font-size: 18px; color: #ff0033aa; animation: float 6s linear infinite; z-index: -1; }
-    @keyframes float { 0% { transform: translateY(0) translateX(0); opacity: 1; } 100% { transform: translateY(-120vh) translateX(30px); opacity: 0; } }
-
-    /* === Tela 2 Labirinto === */
-    #tela2 { display:none; padding: 20px; text-align:center; color:#ff0033; }
-    #labirinto { position: relative; margin: 20px auto; width: 320px; height: 320px; background:#111; border:2px solid #e63946; }
-    .parede { position: absolute; background:#e63946; }
-    #bola { position: absolute; width:20px; height:20px; background:green; border-radius:50%; top:10px; left:10px; }
-    #objetivo { position:absolute; width:20px; height:20px; background:gold; bottom:10px; right:10px; }
-
-    /* === Tela 3 Pergunta === */
-    #tela3 { display:none; padding:20px; text-align:center; color:#ff0033; }
-    .opcao { display:block; margin:10px auto; max-width:300px; }
-
-    #feedback { margin-top:15px; color:white; font-size:1rem; }
-
-    /* === Tela 4 Pedido Namoro === */
-    #tela4 { display:none; text-align:center; padding:30px; color:#ff0033; font-family:Georgia, serif; }
-    #typedTitle { font-size:2rem; margin-bottom:15px; }
-    #typedText { font-size:1.2rem; margin-bottom:25px; }
-    #btnNao { position:relative; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Especial ❤️</title>
+    <style>
+        body {margin:0; padding:0; background:#0b0b0b; color:#e63946; font-family:Georgia, serif; overflow-x:hidden;}
+        h1,h2 {text-align:center; color:#ff0033;}
+        p {color:#fff; font-size:1.2rem; line-height:1.7rem; text-align:justify;}
+        button {padding:10px 20px; font-size:1.2rem; cursor:pointer; border:2px solid #1e90ff; background:#0000; color:#1e90ff; border-radius:8px; transition:0.3s;}
+        button:hover {background:#1e90ff; color:#000;}
+        .heart-button {background:none; border:none; cursor:pointer; font-size:5rem; color:#ff0033; animation:pulse 1.3s infinite; transition:0.3s;}
+        .heart-button:hover {transform:scale(1.2);}
+        @keyframes pulse {0%{transform:scale(1);}50%{transform:scale(1.15);}100%{transform:scale(1);}}
+        .heart-container {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+        .click-text {color:#ff0033; font-size:1.2rem; margin-top:10px;}
+        .card {opacity:0; margin:50px auto; max-width:750px; padding:35px; background:#111; border:2px solid #e63946; border-radius:14px; box-shadow:0 0 40px #e6394666; animation:fadeIn 1.5s ease forwards; animation-delay:1.2s; display:none;}
+        @keyframes fadeIn {from{opacity:0; transform:translateY(40px);} to{opacity:1; transform:translateY(0);}}
+        .gallery {margin-top:20px; text-align:center;}
+        .gallery img {width:80%; max-width:600px; border-radius:12px; box-shadow:0 0 20px #e63946aa; transition:opacity 1s ease-in-out;}
+        .footer {text-align:center; margin-top:20px; color:#ff0033; font-style:italic;}
+        .floating-heart {position:fixed; bottom:-10px; font-size:18px; color:#ff0033aa; animation:float 6s linear infinite; z-index:-1;}
+        @keyframes float {0%{transform:translateY(0) translateX(0); opacity:1;}100%{transform:translateY(-120vh) translateX(30px); opacity:0;}}
+        #labirinto .parede {position:absolute; background:#e63946;}
+        #labirinto #bola {position:absolute; width:20px; height:20px; background:green; border-radius:50%;}
+        #labirinto #objetivo {position:absolute; width:20px; height:20px; background:gold;}
+        .tela {display:none; padding:20px;}
+        #touchControls button{font-size:1.5rem; width:60px; height:60px; border:2px solid #1e90ff; border-radius:10px; background:#0000; color:#1e90ff;}
+        #touchControls2 button{font-size:1.5rem; width:60px; height:60px; border:2px solid #1e90ff; border-radius:10px; background:#0000; color:#1e90ff;}
+    </style>
 </head>
 <body>
 
-<!-- === Tela 1 Carta === -->
-<div class="card" id="card">
-    <h1>Para Você ❤️</h1>
-    <p>
-        A gente se conhece há tão pouco tempo, e mesmo assim, cada dia ao seu lado tem sido incrível.  
-        Cada momento que passa, eu gosto ainda mais de você.  
-        Sei que tenho meus defeitos, penso demais às vezes, mas a cada dia me sinto mais tranquilo e seguro com você.<br><br>
-
-        Sei que já falei aquelas frases meio clichês, tipo "vai passar a vida toda comigo"… mas é sério, kkk.  
-        Tudo que eu puder fazer para que isso aconteça, eu farei.<br><br>
-
-        Esse pequeno presente é só uma forma de carinho, um jeito de te mostrar o quanto você é especial para mim.  
-        Feliz aniversário, minha gostosa ❤️
-    </p>
-    <div class="gallery">
-        <img id="currentImage" src="assets/foto1.jpg" alt="Memória">
+<!-- Tela 1: Carta -->
+<div id="tela1">
+    <div class="heart-container">
+        <button class="heart-button" id="heartBtn">❤️</button>
+        <div class="click-text">Clique aqui</div>
     </div>
-    <div class="footer">
-        Com carinho, de alguém que está gostando muito de você ❤️
+    <div class="card" id="card">
+        <h1>Para Você ❤️</h1>
+        <p>
+            A gente se conhece há tão pouco tempo, e mesmo assim, cada dia ao seu lado tem sido incrível.  
+            Cada momento que passa, eu gosto ainda mais de você.  
+            Sei que tenho meus defeitos, penso demais às vezes, mas a cada dia me sinto mais tranquilo e seguro com você.<br><br>
+            Sei que já falei aquelas frases meio clichês, tipo "vai passar a vida toda comigo"… mas é sério, kkk.  
+            Tudo que eu puder fazer para que isso aconteça, eu farei.<br><br>
+            Esse pequeno presente é só uma forma de carinho, um jeito de te mostrar o quanto você é especial para mim.  
+            Feliz aniversário, minha gostosa ❤️
+        </p>
+        <div class="gallery">
+            <img id="currentImage" src="assets/foto1.jpg" alt="Memória">
+        </div>
+        <div class="footer">
+            Com carinho, de alguém que está gostando muito de você ❤️
+        </div>
+        <div style="text-align:center; margin-top:20px;">
+            <button id="btnProximo1">PRÓXIMO ➜</button>
+        </div>
     </div>
-
-    <!-- Botão PRÓXIMO fixo -->
-    <button id="btnProximoCarta">PRÓXIMO ➜</button>
 </div>
 
-<!-- === Tela 2 Labirinto === -->
-<div id="tela2">
+<!-- Tela 2: Labirinto -->
+<div id="tela2" class="tela">
     <h2>Joguinho: Leve a bolinha até o objetivo 🟡</h2>
-    <div id="labirinto">
-        <div class="parede" style="top:50px; left:0; width:250px; height:10px;"></div>
-        <div class="parede" style="top:120px; left:70px; width:250px; height:10px;"></div>
-        <div id="bola"></div>
+    <div id="labirinto" style="position: relative; margin: 20px auto; width: 320px; height: 320px; background:#111; border:2px solid #e63946;">
+        <div class="parede" style="top:50px; left:0; width:220px; height:10px;"></div>
+        <div class="parede" style="top:100px; left:100px; width:220px; height:10px;"></div>
+        <div class="parede" style="top:150px; left:0; width:180px; height:10px;"></div>
+        <div class="parede" style="top:200px; left:140px; width:180px; height:10px;"></div>
+        <div class="parede" style="top:250px; left:0; width:200px; height:10px;"></div>
+        <div class="parede" style="top:300px; left:120px; width:200px; height:10px;"></div>
+        <div class="parede" style="top:0; left:50px; width:10px; height:80px;"></div>
+        <div class="parede" style="top:80px; left:150px; width:10px; height:80px;"></div>
+        <div class="parede" style="top:160px; left:60px; width:10px; height:80px;"></div>
+        <div class="parede" style="top:240px; left:160px; width:10px; height:80px;"></div>
+        <div id="bola" style="top:10px; left:10px;"></div>
         <div id="objetivo"></div>
     </div>
-    <button id="btnProximoLab" style="display:none;">PRÓXIMO ➜</button>
+    <div id="touchControls" style="position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:10;">
+        <button class="touchBtn" data-dir="up">⬆️</button>
+    </div>
+    <div id="touchControls2" style="position:fixed; bottom:90px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:10;">
+        <button class="touchBtn" data-dir="left">⬅️</button>
+        <button class="touchBtn" data-dir="down">⬇️</button>
+        <button class="touchBtn" data-dir="right">➡️</button>
+    </div>
+    <div style="text-align:center; margin-top:20px;">
+        <button id="btnProximoLab" style="display:none;">PRÓXIMO ➜</button>
+    </div>
 </div>
 
-<!-- === Tela 3 Pergunta === -->
-<div id="tela3">
+<!-- Tela 3: Pergunta -->
+<div id="tela3" class="tela">
     <h2>Qual foi a data que a gente se conheceu?</h2>
-    <button class="opcao" data-resposta="A">11 de outubro de 2025</button>
-    <button class="opcao" data-resposta="B">14 de outubro de 2025</button>
-    <button class="opcao" data-resposta="C">13 de outubro de 2025</button>
-    <button class="opcao" data-resposta="D">15 de outubro de 2025</button>
-    <div id="feedback"></div>
-    <button id="btnProximoQuiz" style="display:none;">PRÓXIMO ➜</button>
+    <div style="text-align:center; margin-top:20px;">
+        <button class="resposta" data-res="A">Dia 11 de outubro de 2025</button>
+        <button class="resposta" data-res="B">Dia 14 de outubro de 2025</button>
+        <button class="resposta" data-res="C">Dia 13 de outubro de 2025</button>
+        <button class="resposta" data-res="D">Dia 15 de outubro de 2025</button>
+    </div>
 </div>
 
-<!-- === Tela 4 Pedido de Namoro === -->
-<div id="tela4">
-    <div id="typedTitle"></div>
-    <div id="typedText"></div>
-    <button id="btnSim">SIM</button>
-    <button id="btnNao">NÃO</button>
-    <img id="fotoFinal" src="assets/fotoFinal.jpg" style="display:none; margin-top:20px; max-width:300px;">
+<!-- Tela 4: Pedido de namoro -->
+<div id="tela4" class="tela" style="text-align:center;">
+    <h2>Eu tô gostando muito de você…</h2>
+    <p>Então FODASE, vou pedir mesmo! ❤️🔥<br> Aceita namorar comigo, Byanca Brytiney da Silva, vulgo amor da minha vida?</p>
+    <button id="btnSim">SIM 😍</button>
+    <button id="btnNao">NÃO 😭</button>
+    <div id="btnProximoFinal" style="display:none; margin-top:20px;">
+        <button>PRÓXIMO ➜</button>
+    </div>
+</div>
+
+<!-- Tela 5: Final engraçado -->
+<div id="tela5" class="tela" style="text-align:center; padding:40px; color:#ff0033; font-family:Georgia, serif;">
+    <h1>Mesmo se você tentasse colocar "NÃO"… 😏</h1>
+    <p style="font-size:1.4rem; max-width:700px; margin:auto; margin-top:20px; line-height:2rem;">
+        …não iria conseguir kkkkk 💋<br>
+        Vai tentar fazer o teste?<br>
+        Ou namora, ou namora.<br>
+        Você já é minha, b. Agora é oficial.<br>
+        Beijos 😘🔥
+    </p>
 </div>
 
 <script>
-/* === Tela 1 Carta === */
-const images = ["assets/foto1.jpg","assets/foto2.jpg","assets/foto3.jpg"];
-let currentIndex=0;
-const currentImage=document.getElementById("currentImage");
-function startGallery(){
-    document.getElementById("card").style.display="block";
-    setInterval(()=>{
-        currentIndex++;
-        if(currentIndex>=images.length) currentIndex=0;
-        currentImage.style.opacity=0;
-        setTimeout(()=>{ currentImage.src=images[currentIndex]; currentImage.style.opacity=1; },500);
-    },3000);
-}
-startGallery();
-
-document.getElementById("btnProximoCarta").onclick = function(){
-    document.getElementById("card").style.display="none";
-    document.getElementById("tela2").style.display="block";
-};
-
-/* === Tela 2 Labirinto === */
-const bola=document.getElementById("bola");
-const objetivo=document.getElementById("objetivo");
-const btnProximoLab=document.getElementById("btnProximoLab");
-let pos={x:10,y:10};
-const vel=5;
-const paredes=[{x:0,y:50,w:250,h:10},{x:70,y:120,w:250,h:10}];
-function colisao(px,py){ for(let p of paredes){ if(px+20>p.x && px<p.x+p.w && py+20>p.y && py<p.y+p.h) return true; } return false; }
-function checkObjetivo(){ 
-    const obj=objetivo.getBoundingClientRect();
-    const b=bola.getBoundingClientRect();
-    const dx=Math.abs((b.left+b.width/2)-(obj.left+obj.width/2));
-    const dy=Math.abs((b.top+b.height/2)-(obj.top+obj.height/2));
-    if(dx<10 && dy<10) return true;
-    return false;
-}
-function mover(dx,dy){
-    let nx=pos.x+dx, ny=pos.y+dy;
-    if(!colisao(nx,ny)){ pos.x=nx; pos.y=ny; bola.style.left=pos.x+"px"; bola.style.top=pos.y+"px"; }
-    if(checkObjetivo()) btnProximoLab.style.display="block";
-}
-document.addEventListener("keydown",e=>{
-    if(e.key==="ArrowUp") mover(0,-vel);
-    if(e.key==="ArrowDown") mover(0,vel);
-    if(e.key==="ArrowLeft") mover(-vel,0);
-    if(e.key==="ArrowRight") mover(vel,0);
-});
-btnProximoLab.onclick=function(){
-    document.getElementById("tela2").style.display="none";
-    document.getElementById("tela3").style.display="block";
-};
-
-/* === Tela 3 Pergunta === */
-const opcoes=document.querySelectorAll(".opcao");
-const feedback=document.getElementById("feedback");
-const btnProximoQuiz=document.getElementById("btnProximoQuiz");
-opcoes.forEach(btn=>{
-    btn.onclick=()=>{ 
-        if(btn.dataset.resposta==="C"){
-            feedback.innerText="✅ Acertou! ❤️";
-            btnProximoQuiz.style.display="block";
-        } else{
-            feedback.innerText="Resposta errada, não acredito que você errou isso, tente novamente 😅";
-        }
-    };
-});
-btnProximoQuiz.onclick=function(){
-    document.getElementById("tela3").style.display="none";
-    document.getElementById("tela4").style.display="block";
-    iniciarDigitacao();
-    iniciarCorações();
-};
-
-/* === Tela 4 Pedido Namoro === */
-function iniciarDigitacao(){
-    const text="Eu quero passar cada dia da minha vida com você, te fazer feliz e cuidar de você para sempre...";
-    const title="Meu amor,";
-    const typedTitle=document.getElementById("typedTitle");
-    const typedText=document.getElementById("typedText");
-    let i=0,j=0;
-    const intervalTitle=setInterval(()=>{ if(j<title.length){ typedTitle.innerHTML+=title[j]; j++; } else clearInterval(intervalTitle); },100);
-    const intervalText=setInterval(()=>{ if(i<text.length){ typedText.innerHTML+=text[i]; i++; } else clearInterval(intervalText); },50);
-}
-function iniciarCorações(){
-    setInterval(()=>{
-        const h=document.createElement("div");
-        h.className="floating-heart";
-        h.innerText="❤️";
-        h.style.left=Math.random()*100+"vw";
+    // Corações flutuando
+    function floatingHeart() {
+        const h = document.createElement("div");
+        h.className = "floating-heart";
+        h.innerHTML = "❤️";
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.fontSize = (Math.random() * 20 + 10) + "px";
+        h.style.animationDuration = (Math.random() * 4 + 3) + "s";
         document.body.appendChild(h);
-        setTimeout(()=>h.remove(),6000);
-    },400);
-}
-const btnNao=document.getElementById("btnNao");
-btnNao.addEventListener("mouseover",()=>{ 
-    const maxX=window.innerWidth-btnNao.offsetWidth;
-    const maxY=window.innerHeight-btnNao.offsetHeight;
-    btnNao.style.left=Math.random()*maxX+"px";
-    btnNao.style.top=Math.random()*maxY+"px";
-    btnNao.style.position="absolute";
-});
-const btnSim=document.getElementById("btnSim");
-btnSim.onclick=function(){
-    const foto=document.getElementById("fotoFinal");
-    foto.style.display="block";
-    alert("😍 Que bom! Vamos ser felizes juntos!");
-};
+        setTimeout(() => h.remove(), 7000);
+    }
+    setInterval(floatingHeart, 500);
+
+    // Tela 1 - abrir carta e galeria
+    const heartBtn = document.getElementById("heartBtn");
+    const card = document.getElementById("card");
+    const btnProximo1 = document.getElementById("btnProximo1");
+    heartBtn.onclick = ()=>{
+        heartBtn.parentElement.style.display="none";
+        card.style.display="block";
+    }
+    btnProximo1.onclick = ()=>{
+        document.getElementById("tela1").style.display="none";
+        document.getElementById("tela2").style.display="block";
+    }
+
+    // Tela 2 - Labirinto
+    const bola = document.getElementById("bola");
+    const objetivo = document.getElementById("objetivo");
+    const btnProximoLab = document.getElementById("btnProximoLab");
+    const vel = 10;
+    let pos = {x:10,y:10};
+    function mover(dx,dy){
+        pos.x+=dx; pos.y+=dy;
+        if(pos.x<0) pos.x=0; if(pos.y<0) pos.y=0;
+        if(pos.x>300) pos.x=300; if(pos.y>300) pos.y=300;
+        bola.style.left=pos.x+"px"; bola.style.top=pos.y+"px";
+        if(Math.abs(pos.x-300)<20 && Math.abs(pos.y-300)<20){
+            btnProximoLab.style.display="block";
+        }
+    }
+    document.addEventListener("keydown",(e)=>{
+        if(e.key=="ArrowUp") mover(0,-vel);
+        if(e.key=="ArrowDown") mover(0,vel);
+        if(e.key=="ArrowLeft") mover(-vel,0);
+        if(e.key=="ArrowRight") mover(vel,0);
+    });
+    // Touch controls
+    const touchBtns = document.querySelectorAll(".touchBtn");
+    touchBtns.forEach(btn=>{
+        btn.addEventListener("touchstart", ()=>{
+            const dir = btn.dataset.dir;
+            if(dir==="up") mover(0,-vel);
+            if(dir==="down") mover(0,vel);
+            if(dir==="left") mover(-vel,0);
+            if(dir==="right") mover(vel,0);
+        });
+    });
+    btnProximoLab.onclick = ()=>{
+        document.getElementById("tela2").style.display="none";
+        document.getElementById("tela3").style.display="block";
+    }
+
+    // Tela 3 - pergunta
+    const respostas = document.querySelectorAll(".resposta");
+    respostas.forEach(btn=>{
+        btn.onclick = ()=>{
+            if(btn.dataset.res=="C"){
+                document.getElementById("tela3").style.display="none";
+                document.getElementById("tela4").style.display="block";
+            }else{
+                alert("Resposta errada, não acredito que você errou isso, tente novamente sua cagona 😜");
+            }
+        }
+    });
+
+    // Tela 4 - pedido namoro
+    const btnSim = document.getElementById("btnSim");
+    const btnNao = document.getElementById("btnNao");
+    const btnProximoFinal = document.querySelector("#btnProximoFinal button");
+    btnSim.onclick = ()=>{
+        iniciarFogos();
+        setTimeout(()=>{btnProximoFinal.style.display="inline-block";},3000);
+    }
+    btnNao.onclick = ()=>{
+        alert("Não tem como dizer não 😏");
+    }
+    btnProximoFinal.onclick = ()=>{
+        document.getElementById("tela4").style.display="none";
+        document.getElementById("tela5").style.display="block";
+    }
+
+    function iniciarFogos(){
+        for(let i=0;i<20;i++){
+            setTimeout(()=>{
+                const boom=document.createElement("div");
+                boom.style.position="fixed";
+                boom.style.width="8px"; boom.style.height="8px"; boom.style.borderRadius="50%";
+                boom.style.left=Math.random()*window.innerWidth+"px";
+                boom.style.top=Math.random()*window.innerHeight+"px";
+                boom.style.background=`hsl(${Math.random()*360},100%,50%)`;
+                boom.style.boxShadow="0 0 20px white";
+                boom.style.transition="transform 1s, opacity 1s";
+                document.body.appendChild(boom);
+                setTimeout(()=>{boom.style.transform="scale(5)"; boom.style.opacity=0;},50);
+                setTimeout(()=>boom.remove(),1500);
+            },i*150);
+        }
+    }
 </script>
 </body>
 </html>
