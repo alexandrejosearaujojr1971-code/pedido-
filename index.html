@@ -3,67 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pedido Especial ❤️</title>
+<title>Para Você ❤️</title>
 <style>
-body{
-    margin:0;
-    padding:0;
-    background:#0b0b0b;
-    color:#e63946;
-    font-family:"Georgia", serif;
-    overflow-x:hidden;
-}
-.tela{display:none; min-height:100vh; padding:20px; box-sizing:border-box;}
-.botao{padding:15px 30px; margin:10px; font-size:1.2rem; background:black; color:#00f; border:2px solid #00f; cursor:pointer; border-radius:8px; transition:0.3s;}
-.botao:hover{transform:scale(1.1);}
-@keyframes fadeInText{
-    from{opacity:0; transform:scale(0.8);}
-    to{opacity:1; transform:scale(1);}
-}
-/* Carta Tela1 */
-#card h1{text-align:center; color:#ff0033; font-size:2.4rem;}
-#card p{color:#ffffffcc; font-size:1.2rem; line-height:1.7rem; text-align:justify;}
-.gallery{text-align:center; margin-top:20px;}
-.gallery img{width:80%; max-width:600px; border-radius:12px; box-shadow:0 0 20px #e63946aa; transition:opacity 1s ease-in-out;}
-.footer{text-align:center; margin-top:20px; color:#ff0033; font-style:italic;}
-.floating-heart{position:fixed; bottom:-10px; font-size:18px; color:#ff0033aa; animation:float 6s linear infinite; z-index:-1;}
-@keyframes float{
-    0%{transform:translateY(0) translateX(0); opacity:1;}
-    100%{transform:translateY(-120vh) translateX(30px); opacity:0;}
-}
+    body{margin:0;padding:0;background:#0b0b0b;color:#e63946;font-family:Georgia, serif;overflow-x:hidden;}
+    .tela{display:none;padding:20px;}
+    .tela.active{display:block;}
+    h1,h2{text-align:center;color:#ff0033;}
+    p{color:#ffffffcc;font-size:1.2rem;line-height:1.7rem;text-align:justify;}
+    .botao{padding:10px 25px;margin:10px;font-size:18px;background:#000;color:#00f;border:2px solid #00f;border-radius:8px;cursor:pointer;transition:.3s;}
+    .botao:hover{background:#00f;color:#000;}
+    /* LABIRINTO */
+    #labirinto{position:relative;width:320px;height:320px;margin:20px auto;background:#222;border:3px solid #e63946;}
+    .parede{position:absolute;background:#ff0033;}
+    #bola{position:absolute;width:20px;height:20px;background:green;border-radius:50%;top:270px;left:10px;}
+    #objetivo{position:absolute;width:20px;height:20px;background:gold;top:10px;right:10px;}
+    /* PEDIDO NAMORO */
+    #pedido h1{font-size:2rem;text-align:center;color:#ff69b4;text-shadow: 2px 2px 5px #ff0033;}
+    #pedido p{color:#fff;font-size:1.5rem;text-align:center;margin:20px 0;}
+    .firework{position:absolute;width:5px;height:5px;background:yellow;border-radius:50%;pointer-events:none;}
 </style>
 </head>
 <body>
 
 <!-- TELA 1: CARTA -->
-<div id="tela1" class="tela" style="display:block;">
-    <div id="card">
-        <h1>Para Você ❤️</h1>
-        <p>
-        A gente se conhece há tão pouco tempo, e mesmo assim, cada dia ao seu lado tem sido incrível.  
-        Cada momento que passa, eu gosto ainda mais de você.  
-        Sei que tenho meus defeitos, penso demais às vezes, mas a cada dia me sinto mais tranquilo e seguro com você.<br><br>
-        Sei que já falei aquelas frases meio clichês, tipo "vai passar a vida toda comigo"… mas é sério, kkk.  
-        Tudo que eu puder fazer para que isso aconteça, eu farei.<br><br>
-        Esse pequeno presente é só uma forma de carinho, um jeito de te mostrar o quanto você é especial para mim.  
-        Feliz aniversário, minha gostosa ❤️
-        </p>
-        <div class="gallery">
-            <img id="currentImage" src="assets/foto1.jpg" alt="Memória">
-        </div>
-        <div class="footer">
-            Com carinho, de alguém que está gostando muito de você ❤️
-        </div>
-    </div>
-    <div style="text-align:center; margin-top:20px;">
-        <button id="btnProximo1" class="botao">PRÓXIMO ➜</button>
+<div id="tela1" class="tela active">
+    <h1>Para Você ❤️</h1>
+    <p>
+        A gente se conhece há tão pouco tempo, e mesmo assim, cada dia ao seu lado tem sido incrível...
+        <!-- texto completo da carta -->
+    </p>
+    <div style="text-align:center;margin-top:40px;">
+        <button class="botao" id="btnProximo1">PRÓXIMO ➜</button>
     </div>
 </div>
 
 <!-- TELA 2: LABIRINTO -->
 <div id="tela2" class="tela">
-    <h2 style="text-align:center;">Joguinho: Leve a bolinha até o objetivo 🟡</h2>
-    <div id="labirinto" style="position:relative; width:320px; height:320px; margin:20px auto; background:#111; border:2px solid #e63946; touch-action:none;">
+    <h2>Joguinho: Leve a bolinha até o objetivo 🟡</h2>
+    <div id="labirinto">
         <div class="parede" style="top:50px; left:0; width:250px; height:10px;"></div>
         <div class="parede" style="top:120px; left:70px; width:250px; height:10px;"></div>
         <div class="parede" style="top:190px; left:0; width:250px; height:10px;"></div>
@@ -72,99 +49,69 @@ body{
         <div class="parede" style="top:120px; left:150px; width:10px; height:70px;"></div>
         <div class="parede" style="top:190px; left:60px; width:10px; height:70px;"></div>
         <div class="parede" style="top:260px; left:150px; width:10px; height:60px;"></div>
-
-        <div id="bola" style="position:absolute; width:20px; height:20px; background:green; border-radius:50%; top:270px; left:10px;"></div>
-        <div id="objetivo" style="position:absolute; width:20px; height:20px; background:gold; top:10px; right:10px;"></div>
+        <div id="bola"></div>
+        <div id="objetivo"></div>
     </div>
-    <div style="text-align:center; margin-top:20px;">
+    <div style="text-align:center;margin-top:20px;">
         <button id="btnProximoLab" class="botao" style="display:none;">PRÓXIMO ➜</button>
     </div>
 </div>
 
 <!-- TELA 3: PERGUNTA -->
 <div id="tela3" class="tela">
-    <h2 style="text-align:center;">Qual foi a data que a gente se conheceu?</h2>
-    <div style="text-align:center; margin-top:20px;">
-        <button class="btnPergunta botao" data-resposta="A">11 de outubro de 2025</button>
-        <button class="btnPergunta botao" data-resposta="B">14 de outubro de 2025</button>
-        <button class="btnPergunta botao" data-resposta="C">13 de outubro de 2025</button>
-        <button class="btnPergunta botao" data-resposta="D">15 de outubro de 2025</button>
+    <h2>Qual foi a data que a gente se conheceu?</h2>
+    <div style="text-align:center;">
+        <button class="botao" data-resposta="A">Dia 11 de outubro de 2025</button>
+        <button class="botao" data-resposta="B">Dia 14 de outubro de 2025</button>
+        <button class="botao" data-resposta="C">Dia 13 de outubro de 2025</button>
+        <button class="botao" data-resposta="D">Dia 15 de outubro de 2025</button>
     </div>
 </div>
 
-<!-- TELA 4: PEDIDO DE NAMORO -->
-<div id="tela4" class="tela" style="text-align:center; background:#111; color:#ff3366; position:relative;">
-    <h1 style="font-size:2rem; margin-bottom:20px; animation:fadeInText 2s;">Eu tô gostando muito de você!</h1>
-    <h2 style="font-size:1.6rem; margin-bottom:20px; animation:fadeInText 2.5s;">Então FODASE, VOU PEDIR: <br> Aceita namorar comigo?</h2>
-    <p style="margin-bottom:40px; font-size:1.2rem; animation:fadeInText 3s;">Byanca Brytiney da Silva, vulgo Amor da minha vida ❤️</p>
-    <div style="margin-top:30px;">
-        <button id="simBtn" class="botao">SIM</button>
-        <button id="naoBtn" class="botao" style="position:absolute; top:50%; left:60%;">NÃO</button>
+<!-- TELA 4: PEDIDO NAMORO -->
+<div id="pedido" class="tela">
+    <h1>Eu tô gostando muito de você ❤️</h1>
+    <p>Então FODASE, VOU PEDIR: <br> Aceita namorar comigo?<br>Byanca Brytiney da Silva, vulgo amor da minha vida</p>
+    <div style="text-align:center;">
+        <button id="btnSim" class="botao">SIM</button>
+        <button id="btnNao" class="botao">NÃO</button>
     </div>
-    <div style="margin-top:20px;">
-        <button id="btnProximoPedido" class="botao" style="display:none;">PRÓXIMO ➜</button>
-    </div>
-    <canvas id="fireworks" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none;"></canvas>
 </div>
 
 <!-- TELA 5: MENSAGEM FINAL -->
-<div id="tela5" class="tela" style="text-align:center; color:#ff3366; padding:50px;">
-    <h1>Mesmo se você tentasse colocar "NÃO", não conseguiria kkkk 😂</h1>
-    <h2>Você já é minha, agora é oficial ❤️</h2>
-    <p>Beijos 😘</p>
+<div id="tela5" class="tela">
+    <h2>Você já é minha, agora é oficial 😘</h2>
+    <p>Mesmo se tentasse clicar "NÃO", não conseguiria kkk</p>
 </div>
 
 <script>
-// ---------------- TELA 1: PRÓXIMO ----------------
-document.getElementById("btnProximo1").onclick = ()=>{
-    document.getElementById("tela1").style.display="none";
-    document.getElementById("tela2").style.display="block";
-}
+// FUNÇÃO DE NAVEGAÇÃO
+function showTela(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');}
 
-// ---------------- TELA 2: LABIRINTO ----------------
+// TELA 1
+document.getElementById('btnProximo1').onclick = ()=>showTela('tela2');
+
+// TELA 2: LABIRINTO
 const bola = document.getElementById("bola");
 const objetivo = document.getElementById("objetivo");
 const btnProximoLab = document.getElementById("btnProximoLab");
 const lab = document.getElementById("labirinto");
 const vel = 10;
 let pos = {x:10, y:270};
-const paredeElems = Array.from(document.querySelectorAll("#labirinto .parede"));
-const paredes = paredeElems.map(p => ({
-    x: parseFloat(p.style.left),
-    y: parseFloat(p.style.top),
-    w: parseFloat(p.style.width),
-    h: parseFloat(p.style.height)
-}));
-function checarColisao(nx, ny){
-    for(let p of paredes){
-        if(nx+20>p.x && nx<p.x+p.w && ny+20>p.y && ny<p.y+p.h){return true;}
-    }
-    return false;
-}
 function mover(dx, dy){
     let nx = pos.x + dx;
     let ny = pos.y + dy;
-
-    // Limites do labirinto
     nx = Math.max(0, Math.min(nx, lab.clientWidth - 20));
     ny = Math.max(0, Math.min(ny, lab.clientHeight - 20));
-
-    if(!checarColisao(nx, ny)){
-        pos.x = nx;
-        pos.y = ny;
-        bola.style.left = pos.x + "px";
-        bola.style.top = pos.y + "px";
-    }
-
-    // Checar objetivo
-    const objX = objetivo.offsetLeft;
-    const objY = objetivo.offsetTop;
+    pos.x = nx; pos.y = ny;
+    bola.style.left = pos.x + "px"; bola.style.top = pos.y + "px";
+    // Checa se chegou no objetivo
+    const objX = objetivo.offsetLeft; const objY = objetivo.offsetTop;
     if(pos.x + 20 > objX && pos.x < objX + 20 && pos.y + 20 > objY && pos.y < objY + 20){
         btnProximoLab.style.display = "inline-block";
     }
 }
-// Corrigido: Impede scroll da página ao usar as setas
-document.addEventListener("keydown", e => {
+document.addEventListener("keydown", e=>{
     if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)){
         e.preventDefault();
         if(e.key=="ArrowUp") mover(0,-vel);
@@ -173,8 +120,6 @@ document.addEventListener("keydown", e => {
         if(e.key=="ArrowRight") mover(vel,0);
     }
 });
-
-// Touch para smartphones
 let startTouch = null;
 lab.addEventListener("touchstart", e=>{startTouch=e.touches[0];});
 lab.addEventListener("touchmove", e=>{
@@ -182,79 +127,43 @@ lab.addEventListener("touchmove", e=>{
     const touch = e.touches[0];
     const dx = touch.clientX - startTouch.clientX;
     const dy = touch.clientY - startTouch.clientY;
-    if(Math.abs(dx) > Math.abs(dy)){mover(dx>0?vel:-vel,0);}
-    else{mover(0, dy>0?vel:-vel);}
+    if(Math.abs(dx)>Math.abs(dy)){mover(dx>0?vel:-vel,0);}
+    else{mover(0,dy>0?vel:-vel);}
     startTouch=touch;
     e.preventDefault();
 });
-btnProximoLab.onclick = ()=>{
-    document.getElementById("tela2").style.display="none";
-    document.getElementById("tela3").style.display="block";
-}
+btnProximoLab.onclick = ()=>showTela('tela3');
 
-// ---------------- TELA 3: PERGUNTA ----------------
-document.querySelectorAll(".btnPergunta").forEach(btn=>{
+// TELA 3: PERGUNTA
+document.querySelectorAll('#tela3 .botao').forEach(btn=>{
     btn.onclick = ()=>{
-        if(btn.dataset.resposta==="C"){
-            document.getElementById("tela3").style.display="none";
-            document.getElementById("tela4").style.display="block";
-        } else {
-            alert("Resposta errada, não acredito que você errou isso, tente novamente sua cagona 😜");
-        }
-    }
+        if(btn.dataset.resposta==="C"){showTela('pedido');}
+        else{alert("Resposta errada, não acredito que você errou isso, tente novamente sua cagona");}
+    };
 });
 
-// ---------------- TELA 4: PEDIDO DE NAMORO ----------------
-const naoBtn = document.getElementById("naoBtn");
-const simBtn = document.getElementById("simBtn");
-const btnProximoPedido = document.getElementById("btnProximoPedido");
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-function criarFogos(){
-    let particulas=[];
+// TELA 4: PEDIDO NAMORO
+const btnSim = document.getElementById('btnSim');
+const btnNao = document.getElementById('btnNao');
+btnNao.onclick = ()=>{
+    btnNao.style.position="absolute";
+    btnNao.style.top=Math.random()*80+"%";
+    btnNao.style.left=Math.random()*80+"%";
+};
+btnSim.onclick = ()=>{
+    // Fogos simples
     for(let i=0;i<50;i++){
-        particulas.push({
-            x:Math.random()*canvas.width,
-            y:Math.random()*canvas.height,
-            vx:(Math.random()-0.5)*5,
-            vy:(Math.random()-0.5)*5,
-            alpha:1,
-            cor:`hsl(${Math.random()*360},100%,50%)`
-        });
+        const f=document.createElement('div');
+        f.className='firework';
+        f.style.top=Math.random()*window.innerHeight+'px';
+        f.style.left=Math.random()*window.innerWidth+'px';
+        f.style.background='hsl('+Math.random()*360+',100%,50%)';
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1000);
     }
-    return particulas;
-}
-function animarFogos(particulas){
-    const intervalo=setInterval(()=>{
-        ctx.fillStyle="rgba(0,0,0,0.2)";
-        ctx.fillRect(0,0,canvas.width,canvas.height);
-        particulas.forEach(p=>{
-            ctx.fillStyle=p.cor;
-            ctx.beginPath();
-            ctx.arc(p.x,p.y,3,0,Math.PI*2);
-            ctx.fill();
-            p.x+=p.vx; p.y+=p.vy; p.alpha-=0.01;
-        });
-    },30);
-    setTimeout(()=>clearInterval(intervalo),3000);
-}
-naoBtn.addEventListener("click", ()=>{
-    const maxX=window.innerWidth-naoBtn.offsetWidth;
-    const maxY=window.innerHeight-naoBtn.offsetHeight;
-    naoBtn.style.left=Math.random()*maxX+"px";
-    naoBtn.style.top=Math.random()*maxY+"px";
-});
-simBtn.addEventListener("click", ()=>{
-    const particulas=criarFogos();
-    animarFogos(particulas);
-    btnProximoPedido.style.display="inline-block";
-});
-btnProximoPedido.onclick=()=>{
-    document.getElementById("tela4").style.display="none";
-    document.getElementById("tela5").style.display="block";
+    setTimeout(()=>showTela('tela5'),1500);
 };
 </script>
+
 </body>
 </html>
