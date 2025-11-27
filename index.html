@@ -1,68 +1,94 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Você ❤️</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #0b0b0b;
-            color: #e63946;
-            font-family: "Georgia", serif;
-            overflow-y: auto;
-        }
-        /* === Carta / Tela 1 === */
-        .card {
-            opacity: 0;
-            margin: 50px auto;
-            max-width: 750px;
-            padding: 35px;
-            background: #111;
-            border: 2px solid #e63946;
-            border-radius: 14px;
-            box-shadow: 0 0 40px #e6394666;
-            animation: fadeIn 1.5s ease forwards;
-            animation-delay: 1.2s;
-            display: none;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        h1 { text-align: center; color: #ff0033; font-size: 2.4rem; }
-        p { color: #ffffffcc; font-size: 1.2rem; line-height: 1.7rem; text-align: justify; }
-        .gallery { margin-top: 20px; text-align: center; }
-        .gallery img { width: 80%; max-width: 600px; border-radius: 12px; box-shadow: 0 0 20px #e63946aa; transition: opacity 1s ease-in-out; }
-        .footer { text-align: center; margin-top: 20px; color: #ff0033; font-style: italic; }
-        /* === Botão PRÓXIMO Carta === */
-        #btnProximoCarta { display:block; margin: 20px auto; padding: 12px 25px; background:#ff0033; color:white; font-size:1.2rem; border:none; border-radius:10px; cursor:pointer; }
-        /* === Floating Hearts === */
-        .floating-heart { position: fixed; bottom: -10px; font-size: 18px; color: #ff0033aa; animation: float 6s linear infinite; z-index: -1; }
-        @keyframes float { 0% { transform: translateY(0) translateX(0); opacity: 1; } 100% { transform: translateY(-120vh) translateX(30px); opacity: 0; } }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido Especial ❤️</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #0b0b0b;
+        color: #e63946;
+        font-family: "Georgia", serif;
+        overflow-x: hidden;
+    }
 
-        /* === Tela 2 Labirinto === */
-        #tela2 { display:none; padding: 20px; text-align:center; color:#ff0033; }
-        #labirinto { position: relative; margin: 20px auto; width: 320px; height: 320px; background:#111; border:2px solid #e63946; }
-        .parede { position: absolute; background:#e63946; }
-        #bola { position: absolute; width:20px; height:20px; background:green; border-radius:50%; top:10px; left:10px; }
-        #objetivo { position:absolute; width:20px; height:20px; background:gold; bottom:10px; right:10px; }
+    /* === Carta / Tela 1 === */
+    .card {
+        opacity: 0;
+        margin: 50px auto;
+        max-width: 750px;
+        padding: 35px;
+        background: #111;
+        border: 2px solid #e63946;
+        border-radius: 14px;
+        box-shadow: 0 0 40px #e6394666;
+        animation: fadeIn 1.5s ease forwards;
+        animation-delay: 1.2s;
+        display: none;
+    }
 
-        /* === Tela 3 Pergunta === */
-        #tela3 { display:none; padding:20px; text-align:center; color:#ff0033; }
-        .opcao { display:block; margin:10px auto; padding:12px 20px; background:#ff0033; color:white; border:none; border-radius:10px; cursor:pointer; max-width:300px; }
-        #feedback { margin-top:15px; color:white; font-size:1rem; }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        /* === Tela 4 Pedido Namoro === */
-        #tela4 { display:none; text-align:center; padding:30px; color:#ff0033; font-family:Georgia, serif; }
-        #typedTitle { font-size:2rem; margin-bottom:15px; }
-        #typedText { font-size:1.2rem; margin-bottom:25px; }
-        #btnSim, #btnNao { padding:12px 25px; font-size:1.2rem; border:none; border-radius:10px; cursor:pointer; margin:10px; }
-        #btnSim { background:#ff0033; color:white; }
-        #btnNao { background:#111; color:#ff0033; position:relative; }
-        .heart-floating { position:fixed; font-size:16px; color:#ff0033aa; z-index:-1; animation: float 5s linear infinite; }
-    </style>
+    h1 { text-align: center; color: #ff0033; font-size: 2.4rem; }
+    p { color: #ffffffcc; font-size: 1.2rem; line-height: 1.7rem; text-align: justify; }
+    .gallery { margin-top: 20px; text-align: center; }
+    .gallery img { width: 80%; max-width: 600px; border-radius: 12px; box-shadow: 0 0 20px #e63946aa; transition: opacity 1s ease-in-out; }
+    .footer { text-align: center; margin-top: 20px; color: #ff0033; font-style: italic; }
+
+    /* === Botões estilo azul escuro com contorno azul === */
+    button {
+        background: #001f3f; 
+        color: #00f; 
+        font-weight: bold;
+        border: 2px solid #00f; 
+        border-radius: 10px; 
+        padding: 12px 25px; 
+        font-size: 1.2rem; 
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    button:hover {
+        background: #004080;
+        color: #00f;
+    }
+
+    /* Botão PRÓXIMO fixo na parte inferior da tela */
+    #btnProximoCarta {
+        position: fixed; 
+        bottom: 20px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        z-index: 10;
+    }
+
+    /* === Floating Hearts === */
+    .floating-heart { position: fixed; bottom: -10px; font-size: 18px; color: #ff0033aa; animation: float 6s linear infinite; z-index: -1; }
+    @keyframes float { 0% { transform: translateY(0) translateX(0); opacity: 1; } 100% { transform: translateY(-120vh) translateX(30px); opacity: 0; } }
+
+    /* === Tela 2 Labirinto === */
+    #tela2 { display:none; padding: 20px; text-align:center; color:#ff0033; }
+    #labirinto { position: relative; margin: 20px auto; width: 320px; height: 320px; background:#111; border:2px solid #e63946; }
+    .parede { position: absolute; background:#e63946; }
+    #bola { position: absolute; width:20px; height:20px; background:green; border-radius:50%; top:10px; left:10px; }
+    #objetivo { position:absolute; width:20px; height:20px; background:gold; bottom:10px; right:10px; }
+
+    /* === Tela 3 Pergunta === */
+    #tela3 { display:none; padding:20px; text-align:center; color:#ff0033; }
+    .opcao { display:block; margin:10px auto; max-width:300px; }
+
+    #feedback { margin-top:15px; color:white; font-size:1rem; }
+
+    /* === Tela 4 Pedido Namoro === */
+    #tela4 { display:none; text-align:center; padding:30px; color:#ff0033; font-family:Georgia, serif; }
+    #typedTitle { font-size:2rem; margin-bottom:15px; }
+    #typedText { font-size:1.2rem; margin-bottom:25px; }
+    #btnNao { position:relative; }
+</style>
 </head>
 <body>
 
@@ -86,7 +112,8 @@
     <div class="footer">
         Com carinho, de alguém que está gostando muito de você ❤️
     </div>
-    <!-- Botão PRÓXIMO Carta -->
+
+    <!-- Botão PRÓXIMO fixo -->
     <button id="btnProximoCarta">PRÓXIMO ➜</button>
 </div>
 
@@ -110,7 +137,7 @@
     <button class="opcao" data-resposta="C">13 de outubro de 2025</button>
     <button class="opcao" data-resposta="D">15 de outubro de 2025</button>
     <div id="feedback"></div>
-    <button id="btnProximoQuiz" class="hidden">PRÓXIMO ➜</button>
+    <button id="btnProximoQuiz" style="display:none;">PRÓXIMO ➜</button>
 </div>
 
 <!-- === Tela 4 Pedido de Namoro === -->
@@ -122,135 +149,114 @@
     <img id="fotoFinal" src="assets/fotoFinal.jpg" style="display:none; margin-top:20px; max-width:300px;">
 </div>
 
-<!-- === Script === -->
 <script>
-    // --- Tela 1 Carta ---
-    const images = ["assets/foto1.jpg","assets/foto2.jpg","assets/foto3.jpg"];
-    let currentIndex=0;
-    const currentImage=document.getElementById("currentImage");
-    function startGallery(){
-        document.getElementById("card").style.display="block";
-        setInterval(()=>{
-            currentIndex++;
-            if(currentIndex>=images.length) currentIndex=0;
-            currentImage.style.opacity=0;
-            setTimeout(()=>{ currentImage.src=images[currentIndex]; currentImage.style.opacity=1; },500);
-        },3000);
-    }
-    startGallery();
+/* === Tela 1 Carta === */
+const images = ["assets/foto1.jpg","assets/foto2.jpg","assets/foto3.jpg"];
+let currentIndex=0;
+const currentImage=document.getElementById("currentImage");
+function startGallery(){
+    document.getElementById("card").style.display="block";
+    setInterval(()=>{
+        currentIndex++;
+        if(currentIndex>=images.length) currentIndex=0;
+        currentImage.style.opacity=0;
+        setTimeout(()=>{ currentImage.src=images[currentIndex]; currentImage.style.opacity=1; },500);
+    },3000);
+}
+startGallery();
 
-    document.getElementById("btnProximoCarta").onclick = function(){
-        document.getElementById("card").style.display="none";
-        document.getElementById("tela2").style.display="block";
-    };
+document.getElementById("btnProximoCarta").onclick = function(){
+    document.getElementById("card").style.display="none";
+    document.getElementById("tela2").style.display="block";
+};
 
-    // --- Tela 2 Labirinto ---
-    const bola=document.getElementById("bola");
-    const objetivo=document.getElementById("objetivo");
-    const labirinto=document.getElementById("labirinto");
-    const btnProximoLab=document.getElementById("btnProximoLab");
-    let pos={x:10,y:10};
-    const vel=5;
-    const paredes=[{x:0,y:50,w:250,h:10},{x:70,y:120,w:250,h:10}];
+/* === Tela 2 Labirinto === */
+const bola=document.getElementById("bola");
+const objetivo=document.getElementById("objetivo");
+const btnProximoLab=document.getElementById("btnProximoLab");
+let pos={x:10,y:10};
+const vel=5;
+const paredes=[{x:0,y:50,w:250,h:10},{x:70,y:120,w:250,h:10}];
+function colisao(px,py){ for(let p of paredes){ if(px+20>p.x && px<p.x+p.w && py+20>p.y && py<p.y+p.h) return true; } return false; }
+function checkObjetivo(){ 
+    const obj=objetivo.getBoundingClientRect();
+    const b=bola.getBoundingClientRect();
+    const dx=Math.abs((b.left+b.width/2)-(obj.left+obj.width/2));
+    const dy=Math.abs((b.top+b.height/2)-(obj.top+obj.height/2));
+    if(dx<10 && dy<10) return true;
+    return false;
+}
+function mover(dx,dy){
+    let nx=pos.x+dx, ny=pos.y+dy;
+    if(!colisao(nx,ny)){ pos.x=nx; pos.y=ny; bola.style.left=pos.x+"px"; bola.style.top=pos.y+"px"; }
+    if(checkObjetivo()) btnProximoLab.style.display="block";
+}
+document.addEventListener("keydown",e=>{
+    if(e.key==="ArrowUp") mover(0,-vel);
+    if(e.key==="ArrowDown") mover(0,vel);
+    if(e.key==="ArrowLeft") mover(-vel,0);
+    if(e.key==="ArrowRight") mover(vel,0);
+});
+btnProximoLab.onclick=function(){
+    document.getElementById("tela2").style.display="none";
+    document.getElementById("tela3").style.display="block";
+};
 
-    function colisao(px,py){
-        for(let p of paredes){
-            if(px+20>p.x && px<p.x+p.w && py+20>p.y && py<p.y+p.h) return true;
+/* === Tela 3 Pergunta === */
+const opcoes=document.querySelectorAll(".opcao");
+const feedback=document.getElementById("feedback");
+const btnProximoQuiz=document.getElementById("btnProximoQuiz");
+opcoes.forEach(btn=>{
+    btn.onclick=()=>{ 
+        if(btn.dataset.resposta==="C"){
+            feedback.innerText="✅ Acertou! ❤️";
+            btnProximoQuiz.style.display="block";
+        } else{
+            feedback.innerText="Resposta errada, não acredito que você errou isso, tente novamente 😅";
         }
-        return false;
-    }
-
-    function checkObjetivo(){ 
-        const obj=objetivo.getBoundingClientRect();
-        const b=bola.getBoundingClientRect();
-        const dx=Math.abs((b.left+b.width/2)-(obj.left+obj.width/2));
-        const dy=Math.abs((b.top+b.height/2)-(obj.top+obj.height/2));
-        if(dx<10 && dy<10) return true;
-        return false;
-    }
-
-    function mover(dx,dy){
-        let nx=pos.x+dx, ny=pos.y+dy;
-        if(!colisao(nx,ny)){
-            pos.x=nx; pos.y=ny;
-            bola.style.left=pos.x+"px"; bola.style.top=pos.y+"px";
-        }
-        if(checkObjetivo()) btnProximoLab.style.display="block";
-    }
-
-    document.addEventListener("keydown",e=>{
-        if(e.key==="ArrowUp") mover(0,-vel);
-        if(e.key==="ArrowDown") mover(0,vel);
-        if(e.key==="ArrowLeft") mover(-vel,0);
-        if(e.key==="ArrowRight") mover(vel,0);
-    });
-
-    btnProximoLab.onclick=function(){
-        document.getElementById("tela2").style.display="none";
-        document.getElementById("tela3").style.display="block";
     };
+});
+btnProximoQuiz.onclick=function(){
+    document.getElementById("tela3").style.display="none";
+    document.getElementById("tela4").style.display="block";
+    iniciarDigitacao();
+    iniciarCorações();
+};
 
-    // --- Tela 3 Pergunta ---
-    const opcoes=document.querySelectorAll(".opcao");
-    const feedback=document.getElementById("feedback");
-    const btnProximoQuiz=document.getElementById("btnProximoQuiz");
-
-    opcoes.forEach(btn=>{
-        btn.onclick=()=>{ 
-            if(btn.dataset.resposta==="C"){
-                feedback.innerText="✅ Acertou! ❤️";
-                btnProximoQuiz.classList.remove("hidden");
-            } else{
-                feedback.innerText="Resposta errada, não acredito que você errou isso, tente novamente sua cagona 😅";
-            }
-        };
-    });
-
-    btnProximoQuiz.onclick=function(){
-        document.getElementById("tela3").style.display="none";
-        document.getElementById("tela4").style.display="block";
-        iniciarDigitacao();
-        iniciarCorações();
-    };
-
-    // --- Tela 4 Pedido Namoro ---
-    function iniciarDigitacao(){
-        const text="Eu quero passar cada dia da minha vida com você, te fazer feliz e cuidar de você para sempre...";
-        const title="Meu amor,";
-        const typedTitle=document.getElementById("typedTitle");
-        const typedText=document.getElementById("typedText");
-        let i=0,j=0;
-        const intervalTitle=setInterval(()=>{ if(j<title.length){ typedTitle.innerHTML+=title[j]; j++; } else clearInterval(intervalTitle); },100);
-        const intervalText=setInterval(()=>{ if(i<text.length){ typedText.innerHTML+=text[i]; i++; } else clearInterval(intervalText); },50);
-    }
-
-    function iniciarCorações(){
-        setInterval(()=>{
-            const h=document.createElement("div");
-            h.className="heart-floating";
-            h.innerText="❤️";
-            h.style.left=Math.random()*100+"vw";
-            document.body.appendChild(h);
-            setTimeout(()=>h.remove(),6000);
-        },400);
-    }
-
-    const btnNao=document.getElementById("btnNao");
-    btnNao.addEventListener("mouseover",()=>{ 
-        const maxX=window.innerWidth-btnNao.offsetWidth;
-        const maxY=window.innerHeight-btnNao.offsetHeight;
-        btnNao.style.left=Math.random()*maxX+"px";
-        btnNao.style.top=Math.random()*maxY+"px";
-        btnNao.style.position="absolute";
-    });
-
-    const btnSim=document.getElementById("btnSim");
-    btnSim.onclick=function(){
-        const foto=document.getElementById("fotoFinal");
-        foto.style.display="block";
-        alert("😍 Que bom! Vamos ser felizes juntos!");
-    };
-
+/* === Tela 4 Pedido Namoro === */
+function iniciarDigitacao(){
+    const text="Eu quero passar cada dia da minha vida com você, te fazer feliz e cuidar de você para sempre...";
+    const title="Meu amor,";
+    const typedTitle=document.getElementById("typedTitle");
+    const typedText=document.getElementById("typedText");
+    let i=0,j=0;
+    const intervalTitle=setInterval(()=>{ if(j<title.length){ typedTitle.innerHTML+=title[j]; j++; } else clearInterval(intervalTitle); },100);
+    const intervalText=setInterval(()=>{ if(i<text.length){ typedText.innerHTML+=text[i]; i++; } else clearInterval(intervalText); },50);
+}
+function iniciarCorações(){
+    setInterval(()=>{
+        const h=document.createElement("div");
+        h.className="floating-heart";
+        h.innerText="❤️";
+        h.style.left=Math.random()*100+"vw";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),6000);
+    },400);
+}
+const btnNao=document.getElementById("btnNao");
+btnNao.addEventListener("mouseover",()=>{ 
+    const maxX=window.innerWidth-btnNao.offsetWidth;
+    const maxY=window.innerHeight-btnNao.offsetHeight;
+    btnNao.style.left=Math.random()*maxX+"px";
+    btnNao.style.top=Math.random()*maxY+"px";
+    btnNao.style.position="absolute";
+});
+const btnSim=document.getElementById("btnSim");
+btnSim.onclick=function(){
+    const foto=document.getElementById("fotoFinal");
+    foto.style.display="block";
+    alert("😍 Que bom! Vamos ser felizes juntos!");
+};
 </script>
 </body>
 </html>
